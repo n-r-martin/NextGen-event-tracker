@@ -40,7 +40,7 @@ This project is covered by MIT
 
 ## Questions
 Look for us on GitHub at: 
-- [Nick Martin](https://github.com/n-r-martin "Nick's link")  
-- [Mike Jeluso](https://github.com/GittinIt6 "Nick's link")
-- [Spencer Kerans](https://github.com/Skerans "Spencer's link")
+- [Nick M](https://github.com/n-r-martin "Nick's link")  
+- [Mike J](https://github.com/GittinIt6 "Nick's link")
+- [Spencer K](https://github.com/Skerans "Spencer's link")
 
