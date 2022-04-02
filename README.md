@@ -1,4 +1,19 @@
-# Next-Gen-Event-TrackerInstructions:
+<h1 align="center"> Next Gen Event Tracker <h1>
+
+![badge](https://img.shields.io/badge/license-MIT-blue)
+
+## Description
+
+
+## Table of Contents
+- [Description](#description) 
+- [Installation](#installation)
+- [Contribution](#contribution)
+- [License](#license)
+- [Usage](#usage)
+- [Questions](#questions)
+
+## Installation
 1. update ./config/connection.js and the root/ .env as needed for your database info.
 2. Run ./db/schema.sql using mysql console
 3. Run npm i from terminal
@@ -10,3 +25,22 @@ App will listen on :3001 if running from localhost, or data from process.env.POR
 <http://localhost:3001/api/routetwo> will return data from modeltwo table
 App will use local .env for database connection if running from localhost, or data from process.env if running from app server (i.e. Heroku)
 App will use local .env and settings in connection.js for database connection if running from localhost, or data from process.env to include JAWS_DB if running from app server (i.e. Heroku)
+
+## Contributing
+Follow basic contribution guidelines and coding etiquette, please.
+
+## Licenses 
+![badge](https://img.shields.io/badge/license-MIT-blue)</br>
+
+This project is covered by MIT
+
+  
+## Usage
+
+
+## Questions
+Look for us on GitHub at: 
+- [Nick Martin](https://github.com/n-r-martin "Nick's link")  
+- [Mike Jeluso](https://github.com/GittinIt6 "Nick's link")
+- [Spencer Kerans](https://github.com/Skerans "Spencer's link")
+
