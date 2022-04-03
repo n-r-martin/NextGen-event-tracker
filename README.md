@@ -7,11 +7,18 @@
 
 ## Table of Contents
 - [Description](#description) 
+- [User Stories](#user-stories)  
 - [Installation](#installation)
 - [Contribution](#contribution)
 - [License](#license)
 - [Usage](#usage)
 - [Questions](#questions)
+  
+## User Stories
+As a user, I want to view events for a specific area/region </br>
+As a user, I want to have a profile specific user experience </br>
+As a user, I want to submit an event into the database to contribute to the community. </br>
+As a developer, I want to access community submitted events via api and use in my app. </br>
 
 ## Installation
 1. update ./config/connection.js and the root/ .env as needed for your database info.
@@ -26,10 +33,10 @@ App will listen on :3001 if running from localhost, or data from process.env.POR
 App will use local .env for database connection if running from localhost, or data from process.env if running from app server (i.e. Heroku)
 App will use local .env and settings in connection.js for database connection if running from localhost, or data from process.env to include JAWS_DB if running from app server (i.e. Heroku)
 
-## Contributing
+## Contribution
 Follow basic contribution guidelines and coding etiquette, please.
 
-## Licenses 
+## License
 ![badge](https://img.shields.io/badge/license-MIT-blue)</br>
 
 This project is covered by MIT
