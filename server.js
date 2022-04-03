@@ -4,6 +4,9 @@ const exphbs = require('express-handlebars');
 const routes = require('./controllers');
 const sequelize = require('./config/connection');
 
+// Required dotenv to use the API KEYs
+require('dotenv').config();
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
