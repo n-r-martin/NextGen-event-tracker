@@ -1,27 +1,15 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Location extends Model {}
+class Coordinates extends Model {}
 
-Location.init(
+Coordinates.init(
   {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
-    },
-    country_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    city_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    state_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
     },
     lat: {
       type: DataTypes.INTEGER,
@@ -31,22 +19,22 @@ Location.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    user_id: {
+    geometry_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'user',
-        key: 'id'
-      }
-    }
+        model: 'geometry',
+        key: 'id',
+      },
+    },
   },
   {
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'location',
+    modelName: 'coordinates',
   }
 );
 
 
-module.exports = Location;
+module.exports = Coordinates;
