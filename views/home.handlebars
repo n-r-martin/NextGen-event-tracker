@@ -1,0 +1,120 @@
+
+    <button class="hamburger pure-button btn-secondary" id='menu-open-btn'>
+      <i class="fa fa-bars"></i>
+    </button>
+
+
+    <form id="option-menu" class="pure-form pure-form-aligned menu">
+      <div id="menu-header">
+        <h4>Options</h4>
+        <i class="far fa-times" id='menu-close-btn'></i>
+      </div>
+
+      <div id='menu-body'>
+        <div class='menu-section'>
+          <h5>Date Range</h5>
+          <label for="from">From</label>
+          <input type="date" id="from" name="from" class="from pure-u-5-5" placeholder="mm/dd/yyyy" value="">
+          <label for="to">To</label>
+          <input type="date" id="to" name="to" class="to pure-u-5-5" placeholder="mm/dd/yyyy">
+        </div>
+
+        <div class='menu-section' id="event-types">
+          <h5>Event Types</h5>
+          <label for="checkbox-all" class="pure-checkbox">
+            <input type="checkbox" id="checkbox-all" value="" checked /> All Types
+          </label>
+
+          <label for="checkbox-wildfire" class="pure-checkbox">
+            <input type="checkbox" class='single-event-type' id="checkbox-wildfire" data-event-type='wildfires' value=""
+              checked /> Wildfires
+          </label>
+
+          <label for="checkbox-severe-storms" class="pure-checkbox">
+            <input type="checkbox" class='single-event-type' id="checkbox-severe-storms" data-event-type='severeStorms'
+              value="" checked /> Severe Storms
+          </label>
+
+          <label for="checkbox-volcanoes" class="pure-checkbox">
+            <input type="checkbox" class='single-event-type' id="checkbox-volcanoes" data-event-type='volcanoes'
+              value="" checked /> Volcanoes
+          </label>
+
+          <label for="checkbox-sea-lake-ice" class="pure-checkbox">
+            <input type="checkbox" class='single-event-type' id="checkbox-sea-lake-ice" value=""
+              data-event-type='seaLakeIce' checked /> Icebergs
+          </label>
+
+          <label for="checkbox-earthquakes" class="pure-checkbox">
+            <input type="checkbox" class='single-event-type' id="checkbox-earthquakes" value=""
+              data-event-type='earthquakes' checked /> Earthquakes
+          </label>
+
+          <label for="checkbox-drought" class="pure-checkbox">
+            <input type="checkbox" class='single-event-type' id="checkbox-drought" value="" data-event-type='drought'
+              checked /> Drought
+          </label>
+
+          <label for="checkbox-dust-haze" class="pure-checkbox">
+            <input type="checkbox" class='single-event-type' id="checkbox-dust-haze" value="" data-event-type='dustHaze'
+              checked /> Dust Haze
+          </label>
+
+          <label for="checkbox-floods" class="pure-checkbox">
+            <input type="checkbox" class='single-event-type' id="checkbox-floods" value="" data-event-type='floods'
+              checked /> Floods
+          </label>
+
+          <label for="checkbox-landslides" class="pure-checkbox">
+            <input type="checkbox" class='single-event-type' id="checkbox-landslides" value=""
+              data-event-type='landslides' checked /> Landslides
+          </label>
+
+          <label for="checkbox-manmade" class="pure-checkbox">
+            <input type="checkbox" class='single-event-type' id="checkbox-manmade" value="" data-event-type='manmade'
+              checked /> Manmade
+          </label>
+
+          <label for="checkbox-snow" class="pure-checkbox">
+            <input type="checkbox" class='single-event-type' id="checkbox-snow" value="" data-event-type='snow'
+              checked /> Snow
+          </label>
+
+          <label for="checkbox-temp-extremes" class="pure-checkbox">
+            <input type="checkbox" class='single-event-type' id="checkbox-temp-extremes" value=""
+              data-event-type='tempExtremes' checked /> Temp. Extremes
+          </label>
+
+          <label for="checkbox-water-color" class="pure-checkbox">
+            <input type="checkbox" class='single-event-type' id="checkbox-water-color" value=""
+              data-event-type='waterColor' checked /> Water Color
+          </label>
+        </div>
+        
+      </div>
+      <div id="menu-body-bottom-gradient"></div>
+    </form>
+
+
+    <form id="search-bar" class="pure-form">
+      <input type="text" class="pure-input-2-3" id="search-city" placeholder="enter a city name..." />
+      <button type="submit" class="pure-button btn-secondary" id="search-btn">Search</button>
+    </form>
+    <!-- About/Help UI -->
+
+    <!-- Buttons -->
+    <button type="button" class="pure-button btn-primary" id='data-refresh-btn' disabled><i
+        class="fas fa-sync-alt"></i>Refresh Map</button>
+
+
+    <div id='bottom-right-btn-group'>
+      <button class="pure-button btn-secondary modal-btn" id='help-btn' data-modal='help'><i
+          class="far fa-map-marker-question" data-modal='help'></i></button>
+      <button class="pure-button btn-secondary modal-btn" id='about-btn' data-modal='about'><i class="far fa-info"
+          data-modal='about'></i>About</button>
+    </div>
+
+    <!-- Error Message -->
+    <div id="error-message" class="hide">
+      <p>Error</p>
+    </div>
