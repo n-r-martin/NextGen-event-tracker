@@ -3,16 +3,17 @@ const { Location } = require('../../models');
 
 //current route /api/location
 
-router.get('/:city_name', async (req, res) => {
-  // find one category by its `id` value
-  // be sure to include its associated Products
-  try{
-    
-    //maybe call the weather api in here, using all parameters at once?
-    const locationData = await Location.findOne(req.params.city_name, {
-      
-    });
+router.get('/:city_name?', async (req, res) => {
 
+  try{
+    console.log(typeof req.params.city_name);
+
+    const locationData = await Location.findOne({
+      where: {
+        city_name: req.params.city_name,
+      }
+    });
+    console.log(locationData);
     if (!locationData) {
       res.status(404).json({ message: `That location doesn't exist.`});
       return;
@@ -22,7 +23,5 @@ router.get('/:city_name', async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-
 
 module.exports = router;
