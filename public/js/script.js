@@ -295,63 +295,64 @@ function displayMessage(string) {
 
 //running init functions now so event handlers can recognize them
 //getStoredLocation and setDatePicker are running in and out of init, because we couldn't get them to run synchronously, and we need the variables set in them to be used in createMap and dataPull
-getStoredLocation();
-setDatePicker();
-init();
+
+    getStoredLocation();
+    setDatePicker();
+    init();
 
 
 
-////// EVENT HANDLERS //////
+     ////// EVENT HANDLERS //////
 
 // Map move event -- triggers new boundaries
 map.on('moveend', function () {
-   dataRefreshBtn.attr('disabled', false);
-   getNewBoundaries();
-});
-
-//Open Modals
-$('#help-btn').on('click', function () {
-   $('#help-modal').removeClass('hidden');
-   $('header, #map, main.overlay').addClass('blur');
-})
-
-$('#about-btn').on('click', function () {
-   $('#about-modal').removeClass('hidden');
-   $('header, #map, main.overlay').addClass('blur');
-})
-
-// Close Modal
-$('.modal-close-btn').on('click', closeModal);
-$('.modal-background').on('click', closeModal);
-
-// Prevents clicking through the modal container and onto to back to close it
-$('.modal-container').on('click', function (evt) {
-   evt.stopPropagation();
-});
-
-// Search City Event
-$("#search-bar").on("submit", function (event) {
-   getCityCoord(event);
-   $("#search-city").val("");
-});
-
-// Refresh Data Event
-dataRefreshBtn.on("click", function () {
-   dataRefreshBtn.attr('disabled', true);
-   dataRefresh();
-   let mapCenter = [(minLat + maxLat) / 2, (minLong + maxLong) / 2];
-   localStorage.setItem("Lat", mapCenter[0]);
-   localStorage.setItem("Lon", mapCenter[1]);
-});
-
-//Open Options Menu
-$('#menu-open-btn').on('click', menuToggleHide);
-
-//Close Options Menu
-$('#menu-close-btn').on('click', menuToggleHide);
-
-//Set toDate after fromDate chosen
-$("#to").on('click', function (event) {
-   const minDate = dateFrom.value;
-   dateTo.setAttribute("min", minDate);
-});
+    dataRefreshBtn.attr('disabled', false);
+    getNewBoundaries();
+ });
+ 
+ //Open Modals
+ $('#help-btn').on('click', function () {
+    $('#help-modal').removeClass('hidden');
+    $('header, #map, main.overlay').addClass('blur');
+ })
+ 
+ $('#about-btn').on('click', function () {
+    $('#about-modal').removeClass('hidden');
+    $('header, #map, main.overlay').addClass('blur');
+ })
+ 
+ // Close Modal
+ $('.modal-close-btn').on('click', closeModal);
+ $('.modal-background').on('click', closeModal);
+ 
+ // Prevents clicking through the modal container and onto to back to close it
+ $('.modal-container').on('click', function (evt) {
+    evt.stopPropagation();
+ });
+ 
+ // Search City Event
+ $("#search-bar").on("submit", function (event) {
+    getCityCoord(event);
+    $("#search-city").val("");
+ });
+ 
+ // Refresh Data Event
+ dataRefreshBtn.on("click", function () {
+    dataRefreshBtn.attr('disabled', true);
+    dataRefresh();
+    let mapCenter = [(minLat + maxLat) / 2, (minLong + maxLong) / 2];
+    localStorage.setItem("Lat", mapCenter[0]);
+    localStorage.setItem("Lon", mapCenter[1]);
+ });
+ 
+ //Open Options Menu
+ $('#menu-open-btn').on('click', menuToggleHide);
+ 
+ //Close Options Menu
+ $('#menu-close-btn').on('click', menuToggleHide);
+ 
+ //Set toDate after fromDate chosen
+ $("#to").on('click', function (event) {
+    const minDate = dateFrom.value;
+    dateTo.setAttribute("min", minDate);
+ });
