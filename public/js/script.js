@@ -242,7 +242,12 @@ function getStoredLocation() {
 ///// Creating the map /////
 function createMap() {
 
-   map = L.map('map').setView([storedLat, storedLon], 10);
+   map = L.map('map', {
+      tap:false,
+   center: new L.latLng(storedLat, storedLon),
+   dragging: true,
+   gestureHandling: "cooperative",
+   zoom: 12});
    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
