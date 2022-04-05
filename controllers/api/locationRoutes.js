@@ -24,5 +24,4 @@ router.get('/:city_name?', async (req, res) => {
   }
 });
 
-
 module.exports = router;
