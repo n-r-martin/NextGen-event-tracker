@@ -1,3 +1,4 @@
+//Weather map api model
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
@@ -21,7 +22,7 @@ Location.init(
     },
     state_name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     lat: {
       type: DataTypes.INTEGER,

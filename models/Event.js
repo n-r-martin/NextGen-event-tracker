@@ -16,7 +16,7 @@ Event.init(
       allowNull: false,
     },
     closed: {
-      type: DataTypes.BOLEAN,
+      type: DataTypes.BOOLEAN,
       allowNull: false,
     },
     description: {

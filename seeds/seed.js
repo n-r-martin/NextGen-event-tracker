@@ -1,9 +1,10 @@
 const sequelize = require('../config/connection');
-const { ModelOne, ModelTwo, User } = require('../models');
+const { ModelOne, ModelTwo, User, Location } = require('../models');
 
 const modeloneData = require('./modeloneData.json');
 const modeltwoData = require('./modeltwoData.json');
 const userData = require('./userData.json'); 
+const locationData = require('./locationSeed.json')
 
 const seedDatabase = async () => {
     await sequelize.sync({ force: true });
@@ -23,6 +24,11 @@ const seedDatabase = async () => {
         returning: true,
     });
 
+    await Location.bulkCreate(locationData, {
+        individualHooks: true,
+        returning: true,
+    });
+    
     process.exit(0);
 };
 

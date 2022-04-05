@@ -1,0 +1,23 @@
+[
+  {
+    "country_name": "US",
+    "city_name": "Denver",
+    "state_name": "Colorado",
+    "lat": "39.7392364",
+    "lon": "-104.9848623"
+  },
+  {
+    "country_name": "US",
+    "city_name": "San Jose",
+    "state_name": "California",
+    "lat": "37",
+    "lon": "-121"
+  },
+  {
+    "country_name": "US",
+    "city_name": "New York",
+    "state_name": "New York",
+    "lat": "40",
+    "lon": "-74"
+  }
+]
