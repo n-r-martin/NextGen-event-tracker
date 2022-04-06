@@ -325,6 +325,11 @@ map.on('moveend', function () {
     $('#about-modal').removeClass('hidden');
     $('header, #map, main.overlay').addClass('blur');
  })
+
+ $('#login-btn').on('click', function () {
+   $('#login-modal').removeClass('hidden');
+   $('header, #map, main.overlay').addClass('blur');
+})
  
  // Close Modal
  $('.modal-close-btn').on('click', closeModal);
