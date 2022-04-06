@@ -191,7 +191,7 @@ async function getCityCoord(event) {
 //^^^^^END of NEW CODE^^^^^//
    // if (newCity) {
 
-   //    // const myApiKey = "b9d312a1f35b1b477f63e4d5e699509c";
+   //    // const myApiKey = "";
 
    //    // const weatherUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${newCity}&limit=1&appid=${myApiKey}`;
 
