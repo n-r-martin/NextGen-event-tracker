@@ -27,9 +27,9 @@ const loginFormHandler = async (event) => {
 const signupFormHandler = async (event) => {
   event.preventDefault();
 
-  const name = document.querySelector('.name-signup').value.trim();
-  const email = document.querySelector('.email-signup').value.trim();
-  const password = document.querySelector('.password-signup').value.trim();
+  const name = document.querySelector('#stacked-name').value.trim();
+  const email = document.querySelector('#stacked-email-signup').value.trim();
+  const password = document.querySelector('#stacked-password-signup').value.trim();
 
   if (name && email && password) {
     const response = await fetch('/api/users', {
