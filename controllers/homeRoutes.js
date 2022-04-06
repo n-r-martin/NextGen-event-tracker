@@ -27,6 +27,7 @@ const { ModelOne, ModelTwo } = require('../models');
 
 router.get('/', async (req,res) => {
   try {
+    console.log(`${req.session.logged_in} a user is logged in`);
     res.status(200).render('home');
   } catch (err) {
     res.status(400).json(err)

@@ -1,71 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mapped Event Tracker</title>
 
-    <!-- jQuery CDN -->
-    <script
-      src="https://code.jquery.com/jquery-3.6.0.min.js"
-      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-      crossorigin="anonymous"
-    ></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mapped Event Tracker</title>
 
-    <!-- Leaflet CSS/JS -->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-      crossorigin=""
-    />
-    <script
-      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-      crossorigin=""
-    ></script>
-    <script
-      src="https://kit.fontawesome.com/e9e3841673.js"
-      crossorigin="anonymous"
-    ></script>
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;800&display=swap"
-      rel="stylesheet"
-    />
+  <!-- Leaflet CSS/JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+  <script src="https://kit.fontawesome.com/e9e3841673.js" crossorigin="anonymous"></script>
 
-    <!-- Normalize & Pure CSS Libraries -->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/purecss@1.0.1/build/base-min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/purecss@2.0.6/build/pure-min.css"
-      integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5"
-      crossorigin="anonymous"
-    />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;800&display=swap" rel="stylesheet" />
 
-    <!-- Local CSS -->
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
+  <!-- Normalize & Pure CSS Libraries -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/base-min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css"
+    integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous" />
 
-  <body>
-    <header>
-      <div id="title-content">
-        <i class="far fa-fire-alt"></i>
-        <h1>Mapped Event Tracker</h1>
-      </div>
-    </header>
-    <main class="overlay">
-      {{{body}}}
-    </main>
+  <!-- Local CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
 
-      <!-- Modals -->
+<body>
+  <header>
+    <div id="title-content">
+      <i class="far fa-fire-alt"></i>
+      <h1>Mapped Event Tracker</h1>
+    </div>
+  </header>
+  <main class="overlay">
+    {{{body}}}
+  </main>
+
+  <!-- Modals -->
   <section class="modal hidden" id='help-modal'>
     <div class="modal-background">
       <div class="modal-container">
@@ -99,10 +79,11 @@
           <p>Thanks for checking our app out! This app is designed to show natural events that have occurred
             around the world with only a couple of clicks required.</p>
 
-          <p>This app was deisgned and developed by a small team of four who share a love for maps and data. We hope you enjoy it! 
+          <p>This app was deisgned and developed by a small team of four who share a love for maps and data. We hope you
+            enjoy it!
           </p>
 
-          <p>&#127759; &#128512; &#128591;	</p>
+          <p>&#127759; &#128512; &#128591; </p>
 
           <h3>Github Repo</h3>
           <a href="https://github.com/skerans/Mapped-event-tracker" target="_blank">&#128073; &nbsp; Here</a>
@@ -111,9 +92,57 @@
     </div>
   </section>
 
+  <section class="modal hidden" id='login-modal'>
+    <div class="modal-background">
+      <div class="modal-container">
+        <div class="modal-header">
+          <i class="far fa-times modal-close-btn"></i>
+          <h2>Login</h2>
+        </div>
+        <div class="modal-body">
+          {{#if logged_in}}
+          <a href="/profile">profile</a> |
+          <button class="no-button" id="logout">logout</button>
+          {{else}}
+          <form class="pure-form pure-form-stacked login-form">
+            <fieldset>
+              <p class="form-title">Log In</p>
+              <label for="stacked-email-login">Email</label>
+              <input type="email" id="stacked-email-login" class="pure-u-md-1-6 email-login" placeholder="Email" />
+              <label for="stacked-password-login">Password</label>
+              <input type="password" id="stacked-password-login" class="pure-u-md-1-6 password-login"
+                placeholder="Password" />
+
+              <button type="submit" class="pure-button pure-button-primary pure-u-1-6 login-button">Log In</button>
+              <span class="pure-form-message">No Account? <a href="">Sign Up</a></span>
+            </fieldset>
+          </form>
+
+          <form class="pure-form pure-form-stacked signup-form">
+            <fieldset>
+              <p class="form-title">Sign Up</p>
+              <label for="stacked-name">Name</label>
+              <input class="form-input" type="text" id="stacked-name" class="pure-u-md-1-6 name-signup" />
+              <label for="stacked-email-signup">Email</label>
+              <input type="email" id="stacked-email-signup" class="pure-u-md-1-6 email-signup" placeholder="Email" />
+              <label for="stacked-password-signup">Password</label>
+              <input type="password" id="stacked-password-signup" class="pure-u-md-1-6 password-signup"
+                placeholder="Password" />
+
+              <button type="submit" class="pure-button pure-button-primary pure-u-1-6 signup-button">Sign Up</button>
+              <span class="pure-form-message">Have an account? <a href="">Log In</a></span>
+            </fieldset>
+          </form>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </section>
+
   <div id="map"></div>
 
-    <script src="/js/script.js"></script>
-  </body>
+  <script src="/js/script.js"></script>
+  <script src="/js/login.js"></script>
+</body>
 
 </html>
