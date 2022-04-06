@@ -101,7 +101,8 @@
         </div>
         <div class="modal-body">
           {{#if logged_in}}
-          <a href="/profile">profile</a> |
+
+          {{user.name}}
           <button class="no-button" id="logout">logout</button>
           {{else}}
           <form class="pure-form pure-form-stacked login-form">
