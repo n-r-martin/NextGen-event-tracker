@@ -71,7 +71,7 @@ singleEventTypeCheckbox.on('change', function () {
 })
 
 // This function fetches event data from the EONET API and uses it to populate the event markers on the map
-function dataPull() {
+async function dataPull() {
    //set date variables based on datepicker values
    dateStart = dateFrom.value;
    dateEnd = dateTo.value;
@@ -89,10 +89,43 @@ function dataPull() {
    }
    
    if (dateEnd >= dateStart) {
-      let queryEONET = `https://eonet.sci.gsfc.nasa.gov/api/v3/events?bbox=${minLong},${maxLat},${maxLong},${minLat}&start=${dateStart}&end=${dateEnd}&category=${eventTypesArr}&limit=${eventCount}&status=all`;
-      fetch(queryEONET)
-         .then(response => response.json())
-         .then(data => {
+      let objAry = [];
+      // console.log(`objAry is: ${JSON.stringify(objAry)}`);
+      objAry.push({
+         minLong:`${minLong}`, 
+         maxLat:`${maxLat}`, 
+         maxLong:`${maxLong}`, 
+         minLat:`${minLat}`, 
+         dateStart:`${dateStart}`, 
+         dateEnd:`${dateEnd}`, 
+         eventTypesArr:`${eventTypesArr}`, 
+         eventCount:`${eventCount}`
+      });
+      console.log(`objAry is: ${JSON.stringify(objAry[0])}`);
+      console.log(`
+         minLong:${minLong}, 
+         maxLat:${maxLat}, 
+         maxLong:${maxLong}, 
+         minLat:${minLat}, 
+         dateStart:${dateStart}, 
+         dateEnd:${dateEnd}, 
+         eventTypesArr:${eventTypesArr}, 
+         eventCount:${eventCount}`);
+      //--original code: let queryEONET = `https://eonet.sci.gsfc.nasa.gov/api/v3/events?bbox=${minLong},${maxLat},${maxLong},${minLat}&start=${dateStart}&end=${dateEnd}&category=${eventTypesArr}&limit=${eventCount}&status=all`;
+      let queryEONET = `/api/eonet`
+      console.log(`queryEONET is: ${queryEONET}`);
+      //--original code: fetch(queryEONET)
+      await fetch (queryEONET, {
+         method: 'POST',
+         headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+         },
+         body: JSON.stringify(objAry[0])
+      })
+         .then(async res => await res.json())
+         .then(async data => {
+            console.log(`data.events is: ${data.events}`);
             var pointList = [];
             var polygonPoints = [];
             let eventData = data.events;
