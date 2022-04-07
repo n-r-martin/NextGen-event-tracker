@@ -6,6 +6,7 @@ const dateFrom = document.getElementById("from");
 const dateTo = document.getElementById("to");
 const errorHandle = document.getElementById("error-message");
 
+
 //map variables
 let layerGroup;
 let map;
@@ -274,10 +275,14 @@ function dataRefresh() {
 // Function for toggling visibility of the options menu
 function menuToggleHide() {
    var optionsMenu = $('#option-menu');
-   if (optionsMenu.css('display') === 'none') {
-      optionsMenu.css('display', 'block');
+   var loginBtn = $('#login-btn')
+
+   if (optionsMenu.css('right') === '-300px') {
+      optionsMenu.css('right', '0');
+      loginBtn.css('right', '308px');
    } else {
-      optionsMenu.css('display', 'none')
+      optionsMenu.css('right', '-300px')
+      loginBtn.css('right', '64px');
    }
 };
 

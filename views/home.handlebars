@@ -1,5 +1,24 @@
-    <button class="hamburger pure-button btn-secondary" id='menu-open-btn'>
-      <i class="fa fa-bars"></i>
+  <div id="title-container">
+    <div id="title-content">
+      <i class="fa-solid fa-fire"></i>
+      <h1>NextGen Event Tracker</h1>
+    </div>
+  </div>
+
+
+     <form id="search-bar" class="pure-form">
+      <input type="text" class="pure-input-2-3" id="search-city" placeholder="enter a city name..." />
+      <button type="submit" class="pure-button btn-secondary" id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </form>
+  
+    
+      <button class="pure-button btn-secondary modal-btn" id='login-btn' data-modal='login'>
+       <i class="fa-solid fa-user-large"></i>
+      </button>
+    
+    
+    <button class="layers-toggle pure-button btn-secondary" id='menu-open-btn'>
+      <i class="fa-solid fa-layer-group"></i>
     </button>
 
 
@@ -89,16 +108,26 @@
               data-event-type='waterColor' checked /> Water Color
           </label>
         </div>
+
+         <div class='menu-section'>
+         <h5>Additional Links</h5>
+
+         
+
+          
+
+         <button class="in-menu-btn"  id='about-btn' data-modal='about'><i class="far fa-info"
+          data-modal='about'></i>About</button>
+
+           <button class="in-menu-btn" id='help-btn' data-modal='help'><i
+          class="far fa-map-marker-question" data-modal='help'></i>Help</button>
+          </div>
         
       </div>
-      <div id="menu-body-bottom-gradient"></div>
     </form>
 
 
-    <form id="search-bar" class="pure-form">
-      <input type="text" class="pure-input-2-3" id="search-city" placeholder="enter a city name..." />
-      <button type="submit" class="pure-button btn-secondary" id="search-btn">Search</button>
-    </form>
+   
     <!-- About/Help UI -->
 
     <!-- Buttons -->
@@ -107,12 +136,7 @@
 
 
     <div id='bottom-right-btn-group'>
-      <button class="pure-button btn-secondary modal-btn" id='help-btn' data-modal='help'><i
-          class="far fa-map-marker-question" data-modal='help'></i></button>
-      <button class="pure-button btn-secondary modal-btn" id='about-btn' data-modal='about'><i class="far fa-info"
-          data-modal='about'></i>About</button>
-      <button class="pure-button btn-secondary modal-btn" id='login-btn' data-modal='login'><i class="far fa-info"
-          data-modal='login'></i>login</button>
+    
     </div>
 
     <!-- Error Message -->
