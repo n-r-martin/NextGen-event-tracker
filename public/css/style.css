@@ -18,11 +18,12 @@ main {
   height: 100vh;
 }
 
-header{
-  height: 7.5vh;
-  width: 100%;
+div#title-container{
+  height: 3rem;
+  width: 312px;
   background: #333;
-  border-bottom: 1px solid #fff;
+  border: 1px solid #fff;
+  border-radius: 5px;
   box-shadow:
   3.4px 3.4px 2.7px rgba(0, 0, 0, 0.022),
   8.7px 8.7px 6.9px rgba(0, 0, 0, 0.031),
@@ -30,15 +31,16 @@ header{
   36.5px 36.5px 29.2px rgba(0, 0, 0, 0.048),
   100px 100px 80px rgba(0, 0, 0, 0.07);
   color: #fff;
-  position: relative;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  display: flex;
+  justify-content: center;
 }
 
 
 div#title-content {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
+  align-self: center;
 }
 
 #title-content i {
@@ -46,7 +48,7 @@ div#title-content {
   color: orange;
 }
 
-i:not(.fa-map-marker-question, .fa-bars) {
+i:not(.fa-map-marker-question, .fa-layer-group, .fa-magnifying-glass, .fa-user-large) {
   margin-right: .5rem;
 }
 
@@ -60,30 +62,56 @@ body{
   margin: auto;
 }
 
-#map { 
-  position: absolute;
-  left:0px; right:0px; top:7.5vh; bottom:0px;
-  /* height: 500px; */
+main {
+  position: relative;
+  height: 100%;
   width: 100%;
-  height: 92.5vh;
-  /* top:0;
-  bottom:0; */
-  z-index: -1;
-  
 }
 
-.overlay {
-  height: 90%;
-  position: relative;
+#map { 
+  position: absolute;
+  /* height: 500px; */
+  width: 100%;
+  height: 100%;
+  /* top:0;
+  bottom:0; */
+  z-index: -1; 
+}
+
+.leaflet-top .leaflet-control {
+  margin-top: 72px;
+}
+
+.pure-button {
+  border-radius: 5px;
 }
 
 #search-bar {
   position: absolute;
-  top: 1vh; 
-  left: 5vh;
+  top: 72px; 
+  left: 56px;
   background-color: transparent;
   border-radius: 10px;
+  display: flex;
+  justify-content: left;
+  gap: 0;
+  flex-wrap: nowrap;
+}
 
+input#search-city {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  width: 222px;
+}
+
+button#search-btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding: .5em .75em;
+}
+
+button#search-btn i {
+  font-size: 1.2em;
 }
 
 button#data-refresh-btn {
@@ -124,26 +152,43 @@ button.btn-secondary {
   pointer-events: all;
 }
 
-.hamburger {
+button#login-btn {
+  position: absolute;
+  top: 10px;
+  right: 64px;
+  height: 38px;
+  width: 38px;
+  border-radius: 50px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  transition: right .3s ease;
+}
+
+#login-btn i {
+  align-self: center;
+}
+
+.layers-toggle {
   position: absolute;
   top: 10px;
   right: 10px;
   z-index: 5;
-  border-radius: 2px;
+  border-radius: 5px;
 }
 
 #option-menu {
   z-index: 10;
   position: absolute;
-  display: none;
-  border: 1px solid #fff;
-  border-radius: 2px;
-  width: 250px;
-  
-  top: 10px;
-  right: 10px;
+  border-left: 1px solid #fff;
+  width: 300px;
+  right: -300px;
+  top: 0;
   background-color: #333;
   color: #e8e8e8;
+  transition: right .3s ease;
+  height: 100vh;
+  overflow: scroll;
 }
 
 div#menu-header {
@@ -173,9 +218,6 @@ i#menu-close-btn {
 
 #menu-body {
   padding: .5rem 1rem;
-  height: 610px;
-  overflow: scroll;
-  position: relative;
 }
 
 #menu-body .menu-section {
@@ -199,7 +241,9 @@ i#menu-close-btn {
 
 .menu-section input[type=checkbox] {
   margin-right: .5rem;
+  accent-color: rgb(255, 75, 43);
 }
+
 
 #menu-body-bottom-gradient {
   width: 100%;
