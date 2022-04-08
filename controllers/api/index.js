@@ -11,5 +11,5 @@ router.use('/routeone', apiRouteOne);
 router.use('/routetwo', apiRouteTwo);
 router.use('/location', location);
 router.use('/getaddress', getAddressRoutes )
-router.use('/eonet', eventDataRoutes);
+router.use('/events', eventDataRoutes);
 module.exports = router;
