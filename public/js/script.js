@@ -200,10 +200,20 @@ async function dataPull() {
                   if (usgsData[index].geometry.type !== "Polygon") {
                      let date = new Date(usgsData[index].properties.time);
                      var eventMarker = L.marker([usgsData[index].geometry.coordinates[1], usgsData[index].geometry.coordinates[0]]);
-                     let eventLink = `<a href="${usgsData[0].properties.url}"target="_blank">More Info</a>`
+                     //* Credit: earthquake radius calculation - https://www.cqsrg.org/tools/perceptionradius/
+                     //* Calculates the preception radius Rp in km of at an earthquake of magnitude y using the Kevin McCue formula y ~ 1.01 ln(Rp) + 0.13.
+                     let radius = Math.floor(Math.exp(usgsData[index].properties.mag/1.01 - 0.13 ) * 1000  + 0.5);
+                     // console.log(`Radius is: ${radius}`);
+                     let eventRadius = L.circle([usgsData[index].geometry.coordinates[1], usgsData[index].geometry.coordinates[0]], {
+                        color: 'orange',
+                        opacity: 0.10,
+                     });
+                     let eventLink = `<a href="${usgsData[index].properties.url}"target="_blank">More Info</a>`
+                     eventRadius.addTo(layerGroup)
+                        .setRadius(radius);
                      eventMarker.addTo(layerGroup)
                        //marker description with date
-                        .bindPopup(`Earthquake - ${usgsData[0].properties.title} -\n Date/Time: ${date.toUTCString()} -\n ${eventLink}`); 
+                        .bindPopup(`Earthquake - ${usgsData[index].properties.title} -\n Date/Time: ${date.toUTCString()} -\n ${eventLink}`); 
                   };
                };
                eventsCount += eventData.length;
