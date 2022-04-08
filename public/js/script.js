@@ -169,7 +169,7 @@ async function dataPull() {
                }
                displayMessage(`${eventData.length} event(s) found between ${dateStart} and ${dateEnd}`);
             } else {
-               displayMessage(`No event found in this area between ${dateStart} and ${dateEnd}`);
+               displayMessage(`No events found in this area between ${dateStart} and ${dateEnd}`);
             };
          });
    }
