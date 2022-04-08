@@ -90,19 +90,21 @@ async function dataPull() {
    }
    
    if (dateEnd >= dateStart) {
-      let objAry = [];
+      //--original code: let queryEONET = `https://eonet.sci.gsfc.nasa.gov/api/v3/events?bbox=${minLong},${maxLat},${maxLong},${minLat}&start=${dateStart}&end=${dateEnd}&category=${eventTypesArr}&limit=${eventCount}&status=all`;
+      const queryEONET = `/api/events/eonet`
+      const queryUSGS = `/api/events/usgs`
+      let eventsCount = 0;
+      let objAry = {};
       // console.log(`objAry is: ${JSON.stringify(objAry)}`);
-      objAry.push({
-         minLong:`${minLong}`, 
-         maxLat:`${maxLat}`, 
-         maxLong:`${maxLong}`, 
-         minLat:`${minLat}`, 
-         dateStart:`${dateStart}`, 
-         dateEnd:`${dateEnd}`, 
-         eventTypesArr:`${eventTypesArr}`, 
-         eventCount:`${eventCount}`
-      });
-      console.log(`objAry is: ${JSON.stringify(objAry[0])}`);
+      objAry = {minLong: `${minLong}`,
+         maxLat:`${maxLat}`,
+         maxLong:`${maxLong}`,
+         minLat:`${minLat}`,
+         dateStart:`${dateStart}`,
+         dateEnd:`${dateEnd}`,
+         eventTypesArr:`${eventTypesArr}`,
+         eventCount:`${eventCount}`};
+      console.log(`objAry is: ${JSON.stringify(objAry)}`);
       console.log(`
          minLong:${minLong}, 
          maxLat:${maxLat}, 
@@ -112,32 +114,33 @@ async function dataPull() {
          dateEnd:${dateEnd}, 
          eventTypesArr:${eventTypesArr}, 
          eventCount:${eventCount}`);
-      //--original code: let queryEONET = `https://eonet.sci.gsfc.nasa.gov/api/v3/events?bbox=${minLong},${maxLat},${maxLong},${minLat}&start=${dateStart}&end=${dateEnd}&category=${eventTypesArr}&limit=${eventCount}&status=all`;
-      let queryEONET = `/api/eonet`
       console.log(`queryEONET is: ${queryEONET}`);
       //--original code: fetch(queryEONET)
-      await fetch (queryEONET, {
-         method: 'POST',
-         headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-         },
-         body: JSON.stringify(objAry[0])
-      })
+      // if ((eventTypesArr.length === 0) || (eventTypesArr.includes('earthquakes') && eventTypesArr.length !== 1)){
+      if (!(eventTypesArr.includes('earthquakes') && eventTypesArr.length === 1)){
+         displayMessage(`PROCESSING EONET EVENT DATA...`);
+         await fetch (queryEONET, {
+            method: 'POST',
+            headers: {
+               'Accept': 'application/json',
+               'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(objAry)
+         })
          .then(async res => await res.json())
-         .then(async data => {
-            console.log(`data.events is: ${data.events}`);
+         .then(async usgsData => {
+            console.log(`eonetData is: ${usgsData}`);
             var pointList = [];
             var polygonPoints = [];
-            let eventData = data.events;
+            let eventData = usgsData;
             console.log(eventData);
             if (eventData.length > 0) {
                for (let index = 0; index < eventData.length; index++) {
-                  if (data.events[index].geometry[0].type !== "Polygon") {
-                     if (data.events[index].geometry.length > 2) {
+                  if (usgsData[index].geometry[0].type !== "Polygon") {
+                     if (usgsData[index].geometry.length > 2) {
                         //build polyline points array
-                        for (let i = 0; i < data.events[index].geometry.length; i++) {
-                           pointList.push(new L.LatLng(data.events[index].geometry[i].coordinates[1], data.events[index].geometry[i].coordinates[0]));
+                        for (let i = 0; i < usgsData[index].geometry.length; i++) {
+                           pointList.push(new L.LatLng(usgsData[index].geometry[i].coordinates[1], usgsData[index].geometry[i].coordinates[0]));
                         };
                         //add polyline to map
                         var drawPolyline = new L.polyline(pointList, {
@@ -149,15 +152,15 @@ async function dataPull() {
                         drawPolyline.addTo(layerGroup);
                         pointList = [];
                      };
-                     var date = new Date(data.events[index].geometry[0].date);
-                     var eventMarker = L.marker([data.events[index].geometry[0].coordinates[1], data.events[index].geometry[0].coordinates[0]]);
+                     var date = new Date(usgsData[index].geometry[0].date);
+                     var eventMarker = L.marker([usgsData[index].geometry[0].coordinates[1], usgsData[index].geometry[0].coordinates[0]]);
                      eventMarker.addTo(layerGroup)
                        //marker description with date
-                        .bindPopup(`${data.events[index].title} -\n Date/Time: ${date.toString()}`); 
+                        .bindPopup(`${usgsData[index].title} -\n Date/Time: ${date.toString()}`); 
                   }
                   else {
-                     for (let i = 0; i < data.events[index].geometry[0].coordinates[0].length; i++) {
-                        polygonPoints.push([data.events[index].geometry[0].coordinates[0][i][1], data.events[index].geometry[0].coordinates[0][i][0]]);
+                     for (let i = 0; i < usgsData[index].geometry[0].coordinates[0].length; i++) {
+                        polygonPoints.push([usgsData[index].geometry[0].coordinates[0][i][1], usgsData[index].geometry[0].coordinates[0][i][0]]);
                      };
                      var polygon = new L.polygon(polygonPoints, {
                         color: 'orange',
@@ -167,12 +170,59 @@ async function dataPull() {
                      polygonPoints = [];
                   };
                }
-               displayMessage(`${eventData.length} event(s) found between ${dateStart} and ${dateEnd}`);
+               eventsCount += eventData.length;
+               displayMessage(`${eventsCount} matching event(s) found between ${dateStart} and ${dateEnd}`);
+               return;
             } else {
-               displayMessage(`No events found in this area between ${dateStart} and ${dateEnd}`);
+               displayMessage(`No matching events found in this area between ${dateStart} and ${dateEnd}`);
+               return;
             };
          });
-   }
+      };
+      if (eventTypesArr.includes('earthquakes') || eventTypesArr.length === 0){
+//-------------START USGS EARTHQUAKE-------------//
+         displayMessage(`PROCESSING EARTHQUAKE DATA...`);
+         await fetch (queryUSGS, {
+            method: 'POST',
+            headers: {
+               'Accept': 'application/json',
+               'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(objAry)
+         })
+         .then(async res => await res.json())
+         .then(async usgsData => {
+            console.log(`usgsData is: ${usgsData}`);
+            let eventData = usgsData;
+            console.log(eventData);
+            if (eventData.length > 0) {
+               for (let index = 0; index < eventData.length; index++) {
+                  if (usgsData[index].geometry.type !== "Polygon") {
+                     let date = new Date(usgsData[index].properties.time);
+                     var eventMarker = L.marker([usgsData[index].geometry.coordinates[1], usgsData[index].geometry.coordinates[0]]);
+                     let eventLink = `<a href="${usgsData[0].properties.url}"target="_blank">More Info</a>`
+                     eventMarker.addTo(layerGroup)
+                       //marker description with date
+                        .bindPopup(`Earthquake - ${usgsData[0].properties.title} -\n Date/Time: ${date.toUTCString()} -\n ${eventLink}`); 
+                  };
+               };
+               eventsCount += eventData.length;
+               displayMessage(`${eventsCount} matching event(s) found between ${dateStart} and ${dateEnd}`);
+               return;
+            } else {
+               displayMessage(`${eventsCount} matching event(s) found between ${dateStart} and ${dateEnd}`);
+               return;
+            };
+         });
+//-------------END USGS EARTHQUAKE-------------//
+         return;
+      } else {
+         displayMessage(`${eventsCount} matching event(s) found between ${dateStart} and ${dateEnd}`);
+      return;
+      };
+      return;
+   };
+   return;
 };
 
 
@@ -210,6 +260,7 @@ async function getCityCoord(event) {
                   localStorage.setItem("Lat", lat);
                   localStorage.setItem("Lon", lon);
                   dataPull();
+                  return;
                 }
                 else {
                   alert('Not a valid city');
