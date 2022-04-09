@@ -128,19 +128,19 @@ async function dataPull() {
             body: JSON.stringify(objAry)
          })
          .then(async res => await res.json())
-         .then(async usgsData => {
-            console.log(`eonetData is: ${usgsData}`);
+         .then(async eonetData => {
+            console.log(`eonetData is: ${eonetData}`);
             var pointList = [];
             var polygonPoints = [];
-            let eventData = usgsData;
+            let eventData = eonetData;
             console.log(eventData);
             if (eventData.length > 0) {
                for (let index = 0; index < eventData.length; index++) {
-                  if (usgsData[index].geometry[0].type !== "Polygon") {
-                     if (usgsData[index].geometry.length > 2) {
+                  if (eonetData[index].geometry[0].type !== "Polygon") {
+                     if (eonetData[index].geometry.length > 2) {
                         //build polyline points array
-                        for (let i = 0; i < usgsData[index].geometry.length; i++) {
-                           pointList.push(new L.LatLng(usgsData[index].geometry[i].coordinates[1], usgsData[index].geometry[i].coordinates[0]));
+                        for (let i = 0; i < eonetData[index].geometry.length; i++) {
+                           pointList.push(new L.LatLng(eonetData[index].geometry[i].coordinates[1], eonet[index].geometry[i].coordinates[0]));
                         };
                         //add polyline to map
                         var drawPolyline = new L.polyline(pointList, {
@@ -152,15 +152,15 @@ async function dataPull() {
                         drawPolyline.addTo(layerGroup);
                         pointList = [];
                      };
-                     var date = new Date(usgsData[index].geometry[0].date);
-                     var eventMarker = L.marker([usgsData[index].geometry[0].coordinates[1], usgsData[index].geometry[0].coordinates[0]]);
+                     var date = new Date(eonetData[index].geometry[0].date);
+                     var eventMarker = L.marker([eonetData[index].geometry[0].coordinates[1], eonetData[index].geometry[0].coordinates[0]]);
                      eventMarker.addTo(layerGroup)
                        //marker description with date
-                        .bindPopup(`${usgsData[index].title} -\n Date/Time: ${date.toString()}`); 
+                        .bindPopup(`${eonetData[index].title} -\n ${date.toString()}`); 
                   }
                   else {
-                     for (let i = 0; i < usgsData[index].geometry[0].coordinates[0].length; i++) {
-                        polygonPoints.push([usgsData[index].geometry[0].coordinates[0][i][1], usgsData[index].geometry[0].coordinates[0][i][0]]);
+                     for (let i = 0; i < eonetData[index].geometry[0].coordinates[0].length; i++) {
+                        polygonPoints.push([eonetData[index].geometry[0].coordinates[0][i][1], eonetData[index].geometry[0].coordinates[0][i][0]]);
                      };
                      var polygon = new L.polygon(polygonPoints, {
                         color: 'orange',
