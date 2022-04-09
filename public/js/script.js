@@ -348,19 +348,6 @@ function menuToggleHide() {
       };
    };
 
-// $( "#clickme" ).click(function() {
-//    $( "#book" ).animate({
-//      width: "toggle",
-//      height: "toggle"
-//    }, {
-//      duration: 5000,
-//      specialEasing: {
-//        width: "linear",
-//        height: "easeOutBounce"
-//      }
-//    });
-//  });
-
 
 // Function to open the modals
 function openModal(evt) {
