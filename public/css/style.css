@@ -17,6 +17,8 @@ body {
   font-family: "Sarabun", sans-serif;
 }
 
+
+
 main {
   height: 100vh;
   position: relative;
@@ -166,7 +168,6 @@ button#login-btn {
   padding: 0;
   display: flex;
   justify-content: center;
-  transition: right 0.3s ease;
 }
 
 #login-btn i {
@@ -187,14 +188,25 @@ button#login-btn {
   position: absolute;
   border-left: 1px solid #fff;
   width: 300px;
-  right: -300px;
+  right: 0;
   top: 0;
+  display: none;
   background-color: #333;
   color: #e8e8e8;
-  transition: right 0.3s ease;
   height: 100vh;
-  overflow: scroll;
+  overflow: auto;
+  overflow: -moz-scrollbars-none;
+  scrollbar-width: none;
+  /* this will hide the scrollbar in internet explorers */
+  -ms-overflow-style: none;
 }
+
+#option-menu::-webkit-scrollbar { 
+  width: 0 !important;
+  display: none;
+}
+
+
 
 div#menu-header {
   position: relative;
