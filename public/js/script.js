@@ -336,16 +336,30 @@ function dataRefresh() {
 // Function for toggling visibility of the options menu
 function menuToggleHide() {
    var optionsMenu = $('#option-menu');
-   var loginBtn = $('#login-btn')
+   var loginBtn = $('#login-btn');
+   var velocity = 200;
 
-   if (optionsMenu.css('right') === '-300px') {
-      optionsMenu.css('right', '0');
-      loginBtn.css('right', '308px');
+   if (optionsMenu.css('display') === 'none') {
+      optionsMenu.toggle("slide", {direction: "right", easing: "linear"}, velocity);
+      loginBtn.animate({right: '308px'}, {duration: velocity, easing: "linear" });
    } else {
-      optionsMenu.css('right', '-300px')
-      loginBtn.css('right', '64px');
-   }
-};
+      optionsMenu.toggle("slide", {direction: "right", easing: "linear"}, velocity);
+      loginBtn.animate({right: '64px'}, {duration: velocity, easing: "linear" }); 
+      };
+   };
+
+// $( "#clickme" ).click(function() {
+//    $( "#book" ).animate({
+//      width: "toggle",
+//      height: "toggle"
+//    }, {
+//      duration: 5000,
+//      specialEasing: {
+//        width: "linear",
+//        height: "easeOutBounce"
+//      }
+//    });
+//  });
 
 
 // Function to open the modals
