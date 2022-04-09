@@ -26,6 +26,23 @@ let dateEnd = new Date();
 checkboxAll = $('#checkbox-all');
 singleEventTypeCheckbox = $('.single-event-type');
 
+// Extending Leaflet's default icon so we can use custom icons
+var customIcon = L.Icon.extend({
+   options: {
+      iconSize: [24,36],
+      shadowSize:   [28, 30],
+      iconAnchor: [12,36],
+      shadowAnchor: [4, 30],
+      popupAnchor:  [0, -36]
+   }
+});
+
+
+var earthquakeIcon = new customIcon({
+   iconUrl: 'img/icons/earthquake-icon.svg',
+   shadowUrl: 'img/icons/icon-shadow.svg'
+})
+
 ///// FUNCTIONS /////
 
 // This function gets the boundaries of the current map view
@@ -199,7 +216,7 @@ async function dataPull() {
                for (let index = 0; index < eventData.length; index++) {
                   if (usgsData[index].geometry.type !== "Polygon") {
                      let date = new Date(usgsData[index].properties.time);
-                     var eventMarker = L.marker([usgsData[index].geometry.coordinates[1], usgsData[index].geometry.coordinates[0]]);
+                     var eventMarker = L.marker([usgsData[index].geometry.coordinates[1], usgsData[index].geometry.coordinates[0]], {icon: earthquakeIcon});
                      //* Credit: earthquake radius calculation - https://www.cqsrg.org/tools/perceptionradius/
                      //* Calculates the preception radius Rp in km of at an earthquake of magnitude y using the Kevin McCue formula y ~ 1.01 ln(Rp) + 0.13.
                      let radius = Math.floor(Math.exp(usgsData[index].properties.mag/1.01 - 0.13 ) * 1000  + 0.5);
