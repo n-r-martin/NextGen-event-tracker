@@ -17,8 +17,6 @@ body {
   font-family: "Sarabun", sans-serif;
 }
 
-
-
 main {
   height: 100vh;
   position: relative;
@@ -205,8 +203,6 @@ button#login-btn {
   width: 0 !important;
   display: none;
 }
-
-
 
 div#menu-header {
   position: relative;
