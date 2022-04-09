@@ -157,7 +157,7 @@ async function dataPull() {
                      if (eonetData[index].geometry.length > 2) {
                         //build polyline points array
                         for (let i = 0; i < eonetData[index].geometry.length; i++) {
-                           pointList.push(new L.LatLng(eonetData[index].geometry[i].coordinates[1], eonet[index].geometry[i].coordinates[0]));
+                           pointList.push(new L.LatLng(eonetData[index].geometry[i].coordinates[1], eonetData[index].geometry[i].coordinates[0]));
                         };
                         //add polyline to map
                         var drawPolyline = new L.polyline(pointList, {
