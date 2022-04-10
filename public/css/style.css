@@ -157,8 +157,8 @@ button.btn-secondary {
 
 button#login-btn {
   position: absolute;
-  top: 10px;
-  right: 64px;
+  top: 0;
+  right: 0;
   height: 38px;
   width: 38px;
   border: 1px solid #fff;
@@ -170,6 +170,66 @@ button#login-btn {
 
 #login-btn i {
   align-self: center;
+}
+
+div#user-ui-container {
+  width: 300px;
+  position: absolute;
+  top: 10px;
+  right: 64px;
+}
+
+div#dynamic-form-container {
+  position: absolute;
+  top: 45px;
+  width: 100%;
+  min-height: 330px;
+  background-color: #333;
+  border: 1px solid #fff;
+  /* padding: 1rem; */
+  border-radius: 5px;
+}
+
+#dynamic-form-container > .pure-form {
+  border-radius: 5px;
+}
+
+#dynamic-form-container .pure-form fieldset {
+  padding: 1rem 1rem 2rem;
+}
+
+div.user-form-header {
+  position: relative;
+  height: 40px;
+  width: 100%;
+  overflow: scroll;
+  padding: 0 1rem;
+  color: #fff;
+  border-bottom: 1px solid #fff;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.user-form-header h3 {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.pure-form-stacked input {
+  margin-bottom: .75rem !important;
+  width: 100% !important;
+  color: #111 !important;
+}
+
+.pure-form-message {
+  color: #e8e8e8;
+  text-align: center;
+}
+
+.pure-form-message a {
+  color:  #ff6e4d;
+  font-weight: 700;
 }
 
 .layers-toggle {
@@ -318,7 +378,7 @@ div.modal-header {
   border-top-right-radius: 5px;
 }
 
-.modal-header i.fa-times {
+.modal-header i.fa-times, .user-form-header i.fa-times {
   position: absolute;
   right: 0.5rem;
   top: 55%;
@@ -412,7 +472,10 @@ div.modal-header {
 }
 
 .login-button {
-  background-image: linear-gradient(to right, red, yellow);
+  background-color: rgb(255, 75, 43);
+  width: 100%;
+  border: 1px solid #fff;
+  margin: .5rem 0 2rem;
 }
 
 .singup-form {

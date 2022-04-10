@@ -14,9 +14,21 @@
     </form>
   
     
-      <button class="pure-button btn-secondary modal-btn" id='login-btn' data-modal='login'>
-       <i class="fa-solid fa-user-large"></i>
-      </button>
+     
+
+      <div id="user-ui-container">
+         <button class="pure-button btn-secondary modal-btn" id='login-btn' data-modal='login'>
+          <i class="fa-solid fa-user-large"></i>
+        </button>
+
+        <div id="dynamic-form-container" class="hidden">
+          {{#if logged_in}}
+          {{> logout}}
+          {{else}}
+          {{> login}}
+          {{/if}}
+        </div>
+      </div>
     
     
     <button class="layers-toggle pure-button btn-secondary" id='menu-open-btn'>

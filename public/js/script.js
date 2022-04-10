@@ -103,6 +103,11 @@ const wildfireIcon = new customIcon({
   shadowUrl: iconShadow,
 });
 
+const genericEventIcon = new customIcon({
+   iconUrl: "img/icons/generic-event-icon.svg",
+   shadowUrl: iconShadow,
+ });
+
 ///// FUNCTIONS /////
 
 // This function gets the boundaries of the current map view
@@ -277,10 +282,10 @@ async function dataPull() {
                     markerIcon = waterColorIcon;
                     break;
                   case "wildfires":
-                    markerIcon = wildfireIcon;
+                    markerIcon = wildfireIcon;  
                     break;
                   default:
-                    markerIcon = "";
+                    markerIcon = genericEventIcon;
                     break;
                 }
 
@@ -505,7 +510,7 @@ function dataRefresh() {
 // Function for toggling visibility of the options menu
 function menuToggleHide() {
   var optionsMenu = $("#option-menu");
-  var loginBtn = $("#login-btn");
+  var userUiContainer = $("#user-ui-container");
   var velocity = 200;
 
   if (optionsMenu.css("display") === "none") {
@@ -514,7 +519,7 @@ function menuToggleHide() {
       { direction: "right", easing: "linear" },
       velocity
     );
-    loginBtn.animate(
+    userUiContainer.animate(
       { right: "308px" },
       { duration: velocity, easing: "linear" }
     );
@@ -524,7 +529,7 @@ function menuToggleHide() {
       { direction: "right", easing: "linear" },
       velocity
     );
-    loginBtn.animate(
+    userUiContainer.animate(
       { right: "64px" },
       { duration: velocity, easing: "linear" }
     );
@@ -647,8 +652,9 @@ $("#about-btn").on("click", function () {
 });
 
 $("#login-btn").on("click", function () {
-  $("#login-modal").removeClass("hidden");
-  $("header, #map, main.overlay").addClass("blur");
+   // Need to run function like we do for options menu -- too many dynamics at work here
+  $("#dynamic-form-container").removeClass("hidden");
+//   $("header, #map, main.overlay").addClass("blur");
 });
 
 // Close Modal
