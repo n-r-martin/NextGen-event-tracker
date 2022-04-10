@@ -699,7 +699,8 @@ $("#to").on("click", function (event) {
 // map.on('click', function(e) {
 //   alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
 // });
-
+let lat;
+let lon;
 //form to add new event
 async function newFormHandler(event) {
   event.preventDefault();
@@ -707,6 +708,9 @@ async function newFormHandler(event) {
   const description = document.querySelector('#description').value.trim();
   const eventType = document.querySelector('#event-type').value;
   const eventDate = document.querySelector('#event-date').value;
+  let eventLat = lat;
+  let eventLon = lon;
+
 
 
   // Send fetch request to add a new event
@@ -716,7 +720,9 @@ async function newFormHandler(event) {
       eventName,
       description,
       eventType,
-      eventDate
+      eventDate,
+      eventLat,
+      eventLon
     }),
     headers: {
       'Content-Type': 'application/json',
@@ -736,3 +742,27 @@ document.querySelector('.new-event-form').addEventListener('submit', newFormHand
   
 
 
+//new-event-button function
+$("#new-event-btn").on("click", function () {
+
+console.log('did we make it');
+var theMarker = {};
+
+map.on('click',function(e){
+  lat = e.latlng.lat;
+  lon = e.latlng.lng;
+
+  console.log("You clicked the map at LAT: "+ lat+" and LONG: "+lon );
+      //Clear existing marker, 
+
+      if (theMarker != undefined) {
+            map.removeLayer(theMarker);
+      };
+  //Add a marker to show where you clicked.
+   theMarker = L.marker([lat,lon]).addTo(map);
+   //opens the new event modal to finish filling out the details
+  $("#login-modal").removeClass("hidden");
+  $("header, #map, main.overlay").addClass("blur");
+});
+
+});
