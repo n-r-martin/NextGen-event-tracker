@@ -686,3 +686,47 @@ $("#to").on("click", function (event) {
   const minDate = dateFrom.value;
   dateTo.setAttribute("min", minDate);
 });
+
+
+
+// //get lat lon on click
+// map.on('click', function(e) {
+//   alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
+// });
+
+//form to add new event
+async function newFormHandler(event) {
+  event.preventDefault();
+  const eventName = document.querySelector('#event-name').value.trim();
+  const description = document.querySelector('#description').value.trim();
+  const eventType = document.querySelector('#event-type').value;
+  const eventDate = document.querySelector('#event-date').value;
+
+
+  // Send fetch request to add a new event
+  const response = await fetch(`/api/newevent`, {
+    method: 'POST',
+    body: JSON.stringify({
+      eventName,
+      description,
+      eventType,
+      eventDate
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (response.ok) {
+    document.location.replace('/');
+
+  } else {
+    alert('Failed to add event');
+
+  }
+}
+
+document.querySelector('.new-event-form').addEventListener('submit', newFormHandler);
+  
+
+
