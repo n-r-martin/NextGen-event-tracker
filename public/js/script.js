@@ -536,6 +536,18 @@ function menuToggleHide() {
   }
 }
 
+function toggleUserMenu() {
+   const userMenuContainer = $("#dynamic-form-container");
+
+   if (userMenuContainer.css("display") === "none") {
+      userMenuContainer.fadeIn(100);
+      $(".login-form").show();
+      $(".signup-form").hide();
+   } else {
+      userMenuContainer.fadeOut(100);
+   }
+}
+
 // Function to open the modals
 function openModal(evt) {
   $(".modal").removeClass("hidden");
@@ -651,11 +663,25 @@ $("#about-btn").on("click", function () {
   $("header, #map, main.overlay").addClass("blur");
 });
 
+// Toggle user menu on/off
 $("#login-btn").on("click", function () {
-   // Need to run function like we do for options menu -- too many dynamics at work here
-  $("#dynamic-form-container").removeClass("hidden");
-//   $("header, #map, main.overlay").addClass("blur");
+  toggleUserMenu();
 });
+
+$("#dynamic-form-container").find(".fa-times").on("click", function () {
+   toggleUserMenu();
+});
+
+// Toggle Login/Signup UI within user menu IF the user is logged out
+$("#sign-up-form-link").on("click", function () {
+   $(".login-form").toggle()
+   $(".signup-form").toggle()
+})
+
+$("#login-form-link").on("click", function () {
+   $(".signup-form").toggle()
+   $(".login-form").toggle()
+})
 
 // Close Modal
 $(".modal-close-btn").on("click", closeModal);
@@ -738,13 +764,13 @@ async function newFormHandler(event) {
   }
 }
 
-document.querySelector('.new-event-form').addEventListener('submit', newFormHandler);
+// document.querySelector('.new-event-form').addEventListener('submit', newFormHandler);
   
 
 
 //new-event-button function
 $("#new-event-btn").on("click", function () {
-
+   $('#map').addClass('pin-drop-mode');
 console.log('did we make it');
 var theMarker = {};
 
@@ -761,8 +787,8 @@ map.on('click',function(e){
   //Add a marker to show where you clicked.
    theMarker = L.marker([lat,lon]).addTo(map);
    //opens the new event modal to finish filling out the details
-  $("#login-modal").removeClass("hidden");
+  $("#new-event-modal").removeClass("hidden");
   $("header, #map, main.overlay").addClass("blur");
-});
+   });
 
 });

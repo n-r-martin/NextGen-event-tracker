@@ -22,6 +22,8 @@ main {
   position: relative;
 }
 
+
+
 div#title-container {
   height: 3rem;
   width: 312px;
@@ -39,6 +41,7 @@ div#title-container {
   top: 10px;
   display: flex;
   justify-content: center;
+  
 }
 
 div#title-content {
@@ -48,11 +51,10 @@ div#title-content {
 #title-content i {
   font-size: 1.5em;
   color: orange;
-}
-
-i:not(.fa-map-marker-question, .fa-layer-group, .fa-magnifying-glass, .fa-user-large) {
   margin-right: 0.5rem;
 }
+
+
 
 #title-content h1 {
   font-size: 1.5em;
@@ -75,6 +77,10 @@ main {
   height: 100%;
   /* Must be explicitly set to zero for UI to appear on top - DONT DELETE! */
   z-index: 0;
+}
+
+#map.pin-drop-mode {
+  cursor: url(../img/icons/pin-drop-icon.svg) 20 40, auto; 
 }
 
 .leaflet-top .leaflet-control {
@@ -124,6 +130,10 @@ button#data-refresh-btn {
   border: 1px solid #fff;
 }
 
+button#data-refresh-btn i {
+  margin-right: 0.5rem;
+}
+
 div#bottom-right-btn-group {
   position: absolute;
   right: 10px;
@@ -154,6 +164,10 @@ button.btn-secondary {
   opacity: 1;
   pointer-events: all;
 }
+
+
+
+/**** USER LOGIN/LOGOUT UI ****/
 
 button#login-btn {
   position: absolute;
@@ -188,6 +202,7 @@ div#dynamic-form-container {
   border: 1px solid #fff;
   /* padding: 1rem; */
   border-radius: 5px;
+  display: none;
 }
 
 #dynamic-form-container > .pure-form {
@@ -219,7 +234,7 @@ div.user-form-header {
 .pure-form-stacked input {
   margin-bottom: .75rem !important;
   width: 100% !important;
-  color: #111 !important;
+  /* color: #111 !important; */
 }
 
 .pure-form-message {
@@ -231,6 +246,38 @@ div.user-form-header {
   color:  #ff6e4d;
   font-weight: 700;
 }
+
+.login-form, .signup-form {
+  background: #333;
+  color: #e8e8e8;
+  position: absolute;
+  width: 100%;
+}
+
+.login-button, .signup-button {
+  background-color: rgb(255, 75, 43);
+  width: 100%;
+  border: 1px solid #fff;
+  margin: .5rem 0 2rem;
+}
+
+/* logout button */
+.logout-button {
+  background-image: linear-gradient(to right, red, yellow);
+}
+
+
+
+/***** FORM DISPLAY STYLES *****/
+.login-form {
+  display: block;
+}
+
+.signup-form {
+  display: none;
+}
+
+/***** LAYERS BUTTON & OPTIONS MENU UI *****/
 
 .layers-toggle {
   position: absolute;
@@ -465,32 +512,6 @@ div.modal-header {
 }
 
 /***** NEW CSS *****/
-
-.login-form {
-  background: #333;
-  color: #e8e8e8;
-}
-
-.login-button {
-  background-color: rgb(255, 75, 43);
-  width: 100%;
-  border: 1px solid #fff;
-  margin: .5rem 0 2rem;
-}
-
-.singup-form {
-  background: #333;
-  color: #e8e8e8;
-}
-
-.signup-button {
-  background-image: linear-gradient(to right, red, yellow);
-}
-
-/* logout button */
-.logout-button {
-  background-image: linear-gradient(to right, red, yellow);
-}
 
 /*new event */
 button#new-event-btn {
