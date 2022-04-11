@@ -36,8 +36,6 @@
 </head>
 
 <body>
-  
-
   <main class="overlay">
     {{{body}}}
   </main>
@@ -89,95 +87,11 @@
     </div>
   </section>
 
-  <section class="modal hidden" id='login-modal'>
-    <div class="modal-background">
-      <div class="modal-container">
-        <div class="modal-header">
-          <i class="far fa-times modal-close-btn"></i>
-          <h2>Login</h2>
-        </div>
-        <div class="modal-body">
-          {{#if logged_in}}
-          <form class='new-event-form'>
-            <legend>Submit new Event?</legend>
-            <label for='event_name'>
-              Event Name:
-            </label>
-            <br/>
-            <textarea id='event-name' name='event-name' rows='2' cols='30'>
-            </textarea>
-            <br/>
-            <label for="event-type"></label>
-            <br/>
-           <input id="event-type" list="type">
-           <datalist id="type">
-              <option value="Wildfires">
-              <option value="Severe Storms">
-              <option value="Volcanoes">
-              <option value="Icebergs">
-              <option value="Earthquakes">
-              <option value="Drought">
-              <option value="Dust Haze">
-              <option value="Floods">
-              <option value="Landslides">
-              <option value="Manmade">
-              <option value="Snow">
-              <option value="Temp. Extremes">
-              <option value="Water Color">
-            </datalist>
-            <br/>
-            <label for='description'>
-              Description:
-            </label>
-            <br/>
-            <textarea id='description' name='description' rows='5' cols='30'>
-            </textarea>
-            <br/>
-            <label for="event-date">Event date:</label>
-            <br/>
-            <input type="date" id="event-date" name="event-date">
-            <br />
-            <br/>
-            <button type='submit' value='Submit'>
-              Submit
-            </button>
-          </form>
-          <button class="pure-button pure-button-primary pure-u-1-6 logout-button" id="logout">logout</button>
-          {{else}}
-          <form class="pure-form pure-form-stacked login-form">
-            <fieldset>
-              <p class="form-title">Log In</p>
-              <label for="stacked-email-login">Email</label>
-              <input type="email" id="stacked-email-login" class="pure-u-md-1-6 email-login" placeholder="Email" />
-              <label for="stacked-password-login">Password</label>
-              <input type="password" id="stacked-password-login" class="pure-u-md-1-6 password-login"
-                placeholder="Password" />
-
-              <button type="submit" class="pure-button pure-button-primary pure-u-1-6 login-button">Log In</button>
-              <span class="pure-form-message">No Account? <a href="">Sign Up</a></span>
-            </fieldset>
-          </form>
-
-          <form class="pure-form pure-form-stacked signup-form">
-            <fieldset>
-              <p class="form-title">Sign Up</p>
-              <label for="stacked-name">Name</label>
-              <input class="form-input" type="text" id="stacked-name" class="pure-u-md-1-6 name-signup" />
-              <label for="stacked-email-signup">Email</label>
-              <input type="email" id="stacked-email-signup" class="pure-u-md-1-6 email-signup" placeholder="Email" />
-              <label for="stacked-password-signup">Password</label>
-              <input type="password" id="stacked-password-signup" class="pure-u-md-1-6 password-signup"
-                placeholder="Password" />
-
-              <button type="submit" class="pure-button pure-button-primary pure-u-1-6 signup-button">Sign Up</button>
-              <span class="pure-form-message">Have an account? <a href="">Log In</a></span>
-            </fieldset>
-          </form>
-          {{/if}}
-        </div>
+ <section class="modal hidden" id='new-event-modal'>
+      <div class="modal-background">
+        {{> submit-new-event}}
       </div>
-    </div>
-  </section>
+    </section>
 
   {{!-- <div id="map"></div> --}}
 

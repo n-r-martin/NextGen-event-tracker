@@ -1,5 +1,7 @@
-<div id="map"></div>
+  {{!-- Container div that leaflet places the map within --}}
+  <div id="map"></div>
 
+{{!-- Title of application --}}
   <div id="title-container">
     <div id="title-content">
       <i class="fa-solid fa-fire"></i>
@@ -7,27 +9,42 @@
     </div>
   </div>
 
-
+      {{!-- City search UI --}}
      <form id="search-bar" class="pure-form">
       <input type="text" class="pure-input-2-3" id="search-city" placeholder="enter a city name..." />
       <button type="submit" class="pure-button btn-secondary" id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
     </form>
+
+    {{!-- Map refresh button --}}
+    <button type="button" class="pure-button btn-primary" id='data-refresh-btn' disabled><i
+        class="fas fa-sync-alt"></i>Refresh Map</button>
   
+
+      {{!-- User menu UI --}}
+      <div id="user-ui-container">
+         <button class="pure-button btn-secondary modal-btn" id='login-btn' data-modal='login'>
+          <i class="fa-solid fa-user-large"></i>
+        </button>
+
+        <div id="dynamic-form-container">
+          {{#if logged_in}}
+          {{> logout}}
+          {{else}}
+          {{> login-signup}}
+          {{/if}}
+        </div>
+      </div>
+
+      <button class="layers-toggle pure-button btn-secondary" id='new-event-btn'>
+      <i class="fa-solid fa-map-pin"></i>
+    </button>
     
-      <button class="pure-button btn-secondary modal-btn" id='login-btn' data-modal='login'>
-       <i class="fa-solid fa-user-large"></i>
-      </button>
-    
-    
+    {{!-- Options menu toggle button --}}
     <button class="layers-toggle pure-button btn-secondary" id='menu-open-btn'>
       <i class="fa-solid fa-layer-group"></i>
     </button>
 
-    <button class="layers-toggle pure-button btn-secondary" id='new-event-btn'>
-      <i class="fa-solid fa-layer-group"></i>
-    </button>
-
-
+    {{!-- Options menu --}}
     <form id="option-menu" class="pure-form pure-form-aligned menu">
       <div id="menu-header">
         <h4>Options</h4>
@@ -118,10 +135,6 @@
          <div class='menu-section'>
          <h5>Additional Links</h5>
 
-         
-
-          
-
          <button class="in-menu-btn"  id='about-btn' data-modal='about'><i class="far fa-info"
           data-modal='about'></i>About</button>
 
@@ -131,16 +144,6 @@
         
       </div>
     </form>
-
-
-   
-    <!-- About/Help UI -->
-
-    <!-- Buttons -->
-    <button type="button" class="pure-button btn-primary" id='data-refresh-btn' disabled><i
-        class="fas fa-sync-alt"></i>Refresh Map</button>
-
-
 
     <!-- Error Message -->
     <div id="error-message" class="hide">
