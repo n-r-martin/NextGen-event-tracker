@@ -107,4 +107,41 @@ router.post('/userAdd', async (req, res) => {
   }
 });
 
+router.get('/userPull', async (req, res) => {
+  try {
+    const region = process.env.AWS_region;
+    const id = process.env.AWS_ACCESS_KEY_ID;
+    const secret = process.env.AWS_SECRET_ACCESS_KEY;
+    const bucket_name = process.env.AWS_S3_Bucket;
+    const s3 = new S3({
+      region,
+      secret,
+      id,
+    });
+    let buf = ""; //Buffer.from(JSON.stringify(newData));
+    let objectData = {};
+
+    const getParams = {
+      Bucket: bucket_name,
+      Key: 'usrAdd-array.json'
+    };
+    //------Get Contents of Existing File------//
+    const fileDownload = await s3.getObject(getParams).promise()
+    .then(async (data) => {
+      if(data.ContentLength < 10){
+        console.log(`no data in file`);
+        res.status(200).json([{}]);
+      } else {
+        console.log(`downloaded successfully. ${data.Location}`);
+        let objectData = JSON.parse(data.Body.toString());
+        // let objectDataAry = [];
+        // objectDataAry = JSON.parse(JSON.stringify(objectData));
+        res.status(200).json(objectData);
+      }
+    })
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
 module.exports = router;
