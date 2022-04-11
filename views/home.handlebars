@@ -35,9 +35,12 @@
         </div>
       </div>
 
+      {{!-- Drop Pin Button - shows only if user is logged in--}}
+      {{#if logged_in}}
       <button class="layers-toggle pure-button btn-secondary" id='new-event-btn'>
-      <i class="fa-solid fa-map-pin"></i>
-    </button>
+        <i class="fa-solid fa-map-pin"></i>
+      </button>
+      {{/if}}
     
     {{!-- Options menu toggle button --}}
     <button class="layers-toggle pure-button btn-secondary" id='menu-open-btn'>
