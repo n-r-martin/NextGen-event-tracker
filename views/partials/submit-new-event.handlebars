@@ -1,0 +1,56 @@
+      <div class="modal-container">
+        <div class="modal-header">
+          <i class="far fa-times modal-close-btn"></i>
+          <h2>Submit New Event</h2>
+        </div>
+        <div class="modal-body">
+          {{#if logged_in}}
+          <form class='pure-form pure-form-stacked new-event-form'>
+            <legend>Submit new Event?</legend>
+            <label for='event_name'>
+              Event Name:
+            </label>
+            <br/>
+            <textarea id='event-name' name='event-name' rows='2' cols='30'>
+            </textarea>
+            <br/>
+            <label for="event-type"></label>
+            <br/>
+           <input id="event-type" list="type">
+           <datalist id="type">
+              <option value="Wildfires">
+              <option value="Severe Storms">
+              <option value="Volcanoes">
+              <option value="Icebergs">
+              <option value="Earthquakes">
+              <option value="Drought">
+              <option value="Dust Haze">
+              <option value="Floods">
+              <option value="Landslides">
+              <option value="Manmade">
+              <option value="Snow">
+              <option value="Temp. Extremes">
+              <option value="Water Color">
+            </datalist>
+            <br/>
+            <label for='description'>
+              Description:
+            </label>
+            <br/>
+            <textarea id='description' name='description' rows='5' cols='30'>
+            </textarea>
+            <br/>
+            <label for="event-date">Event date:</label>
+            <br/>
+            <input type="date" id="event-date" name="event-date">
+            <br />
+            <br/>
+            <button type='submit' value='Submit'>
+              Submit
+            </button>
+          </form>   
+          {{else}}
+          <p>You must have an account and be logged in to submit a new event</p>
+          {{/if}}
+        </div>
+      </div>

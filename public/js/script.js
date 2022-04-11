@@ -103,6 +103,11 @@ const wildfireIcon = new customIcon({
   shadowUrl: iconShadow,
 });
 
+const genericEventIcon = new customIcon({
+   iconUrl: "img/icons/generic-event-icon.svg",
+   shadowUrl: iconShadow,
+ });
+
 ///// FUNCTIONS /////
 
 // This function gets the boundaries of the current map view
@@ -277,10 +282,10 @@ async function dataPull() {
                     markerIcon = waterColorIcon;
                     break;
                   case "wildfires":
-                    markerIcon = wildfireIcon;
+                    markerIcon = wildfireIcon;  
                     break;
                   default:
-                    markerIcon = "";
+                    markerIcon = genericEventIcon;
                     break;
                 }
 
@@ -505,7 +510,7 @@ function dataRefresh() {
 // Function for toggling visibility of the options menu
 function menuToggleHide() {
   var optionsMenu = $("#option-menu");
-  var loginBtn = $("#login-btn");
+  var userUiContainer = $("#user-ui-container");
   var velocity = 200;
 
   if (optionsMenu.css("display") === "none") {
@@ -514,7 +519,7 @@ function menuToggleHide() {
       { direction: "right", easing: "linear" },
       velocity
     );
-    loginBtn.animate(
+    userUiContainer.animate(
       { right: "308px" },
       { duration: velocity, easing: "linear" }
     );
@@ -524,11 +529,23 @@ function menuToggleHide() {
       { direction: "right", easing: "linear" },
       velocity
     );
-    loginBtn.animate(
+    userUiContainer.animate(
       { right: "64px" },
       { duration: velocity, easing: "linear" }
     );
   }
+}
+
+function toggleUserMenu() {
+   const userMenuContainer = $("#dynamic-form-container");
+
+   if (userMenuContainer.css("display") === "none") {
+      userMenuContainer.fadeIn(100);
+      $(".login-form").show();
+      $(".signup-form").hide();
+   } else {
+      userMenuContainer.fadeOut(100);
+   }
 }
 
 // Function to open the modals
@@ -646,10 +663,25 @@ $("#about-btn").on("click", function () {
   $("header, #map, main.overlay").addClass("blur");
 });
 
+// Toggle user menu on/off
 $("#login-btn").on("click", function () {
-  $("#login-modal").removeClass("hidden");
-  $("header, #map, main.overlay").addClass("blur");
+  toggleUserMenu();
 });
+
+$("#dynamic-form-container").find(".fa-times").on("click", function () {
+   toggleUserMenu();
+});
+
+// Toggle Login/Signup UI within user menu IF the user is logged out
+$("#sign-up-form-link").on("click", function () {
+   $(".login-form").toggle()
+   $(".signup-form").toggle()
+})
+
+$("#login-form-link").on("click", function () {
+   $(".signup-form").toggle()
+   $(".login-form").toggle()
+})
 
 // Close Modal
 $(".modal-close-btn").on("click", closeModal);
@@ -732,13 +764,13 @@ async function newFormHandler(event) {
   }
 }
 
-document.querySelector('.new-event-form').addEventListener('submit', newFormHandler);
+// document.querySelector('.new-event-form').addEventListener('submit', newFormHandler);
   
 
 
 //new-event-button function
 $("#new-event-btn").on("click", function () {
-
+   $('#map').addClass('pin-drop-mode');
 console.log('did we make it');
 var theMarker = {};
 
@@ -755,8 +787,8 @@ map.on('click',function(e){
   //Add a marker to show where you clicked.
    theMarker = L.marker([lat,lon]).addTo(map);
    //opens the new event modal to finish filling out the details
-  $("#login-modal").removeClass("hidden");
+  $("#new-event-modal").removeClass("hidden");
   $("header, #map, main.overlay").addClass("blur");
-});
+   });
 
 });
