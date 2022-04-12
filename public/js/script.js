@@ -410,6 +410,9 @@ async function dataPull() {
       );
       // return;
     };
+
+   //   HERE!
+   
     if (eventTypesArr.length === 0) { //TODO: ADD logic here with checkbox
       //-------------START USER DEFINED DATA-------------//
       displayMessage(`PROCESSING USER DEFINED DATA...`);
