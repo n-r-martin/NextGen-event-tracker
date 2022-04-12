@@ -45,6 +45,7 @@ router.post('/usgs', async (req, res) => {
 
 router.post('/userAdd', async (req, res) => {
   try {
+    console.log(req.body);
     const region = process.env.AWS_region;
     const id = process.env.AWS_ACCESS_KEY_ID;
     const secret = process.env.AWS_SECRET_ACCESS_KEY;
@@ -143,5 +144,7 @@ router.get('/userPull', async (req, res) => {
     res.status(400).json(err);
   }
 });
+
+// hello?
 
 module.exports = router;

@@ -410,9 +410,6 @@ async function dataPull() {
       );
       // return;
     };
-
-   //   HERE!
-   
     if (eventTypesArr.length === 0) { //TODO: ADD logic here with checkbox
       //-------------START USER DEFINED DATA-------------//
       displayMessage(`PROCESSING USER DEFINED DATA...`);
@@ -823,8 +820,10 @@ async function newFormHandler(event) {
   }
 }
 
-document.querySelector('.new-event-form').addEventListener('submit', newFormHandler);
+// document.querySelector('.new-event-form').addEventListener('submit', newFormHandler);
   
+
+
 //new-event-button function
 $("#new-event-btn").on("click", function () {
    $('#map').addClass('pin-drop-mode');
