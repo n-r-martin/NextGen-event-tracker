@@ -820,10 +820,8 @@ async function newFormHandler(event) {
   }
 }
 
-// document.querySelector('.new-event-form').addEventListener('submit', newFormHandler);
+document.querySelector('.new-event-form').addEventListener('submit', newFormHandler);
   
-
-
 //new-event-button function
 $("#new-event-btn").on("click", function () {
    $('#map').addClass('pin-drop-mode');
