@@ -563,3 +563,21 @@ button#new-event-btn {
   align-self: center;
 }
 
+@media screen and (max-width:790px) {
+  #title-content h1 { 
+   display:none;
+  }
+  div#title-container {
+    width: 70px;
+  }
+}
+
+@media screen and (max-width:640px) {
+  #error-message {
+    left: 0px;
+    bottom: 25px;
+    padding: 5px 10px;
+    border-top-left-radius: 0px;
+    border-bottom-right-radius: 5px;
+  }
+}
