@@ -179,7 +179,6 @@ async function dataPull() {
     const queryUserDefined = `/api/events/userPull`;
     let eventsCount = 0;
     let objAry = {};
-    // console.log(`objAry is: ${JSON.stringify(objAry)}`);
     objAry = {
       minLong: `${minLong}`,
       maxLat: `${maxLat}`,
@@ -190,17 +189,7 @@ async function dataPull() {
       eventTypesArr: `${eventTypesArr}`,
       eventCount: `${eventCount}`,
     };
-    console.log(`objAry is: ${JSON.stringify(objAry)}`);
-    console.log(`
-         minLong:${minLong}, 
-         maxLat:${maxLat}, 
-         maxLong:${maxLong}, 
-         minLat:${minLat}, 
-         dateStart:${dateStart}, 
-         dateEnd:${dateEnd}, 
-         eventTypesArr:${eventTypesArr}, 
-         eventCount:${eventCount}`);
-    console.log(`queryEONET is: ${queryEONET}`);
+    //console.log(`objAry is: ${JSON.stringify(objAry)}`);
     //--original code: fetch(queryEONET)
     // if ((eventTypesArr.length === 0) || (eventTypesArr.includes('earthquakes') && eventTypesArr.length !== 1)){
     if (!(eventTypesArr.includes("earthquakes") && eventTypesArr.length === 1)) {
@@ -215,10 +204,10 @@ async function dataPull() {
       })
         .then(async (res) => await res.json())
         .then(async (eonetData) => {
-          console.log(`eonetData is: ${eonetData}`);
           var pointList = [];
           var polygonPoints = [];
           let eventData = eonetData;
+          console.log("--EONET DATA--");
           console.log(eventData);
           if (eventData.length > 0) {
             for (let index = 0; index < eventData.length; index++) {
@@ -346,8 +335,9 @@ async function dataPull() {
       })
         .then(async (res) => await res.json())
         .then(async (usgsData) => {
-          console.log(`usgsData is: ${usgsData}`);
+          //console.log(`usgsData is: ${usgsData}`);
           let eventData = usgsData;
+          console.log("--USGS DATA--");
           console.log(eventData);
           if (eventData.length > 0) {
             for (let index = 0; index < eventData.length; index++) {
@@ -367,7 +357,6 @@ async function dataPull() {
                     1000 +
                     0.5
                 );
-                // console.log(`Radius is: ${radius}`);
                 let eventRadius = L.circle(
                   [
                     usgsData[index].geometry.coordinates[1],
@@ -416,15 +405,15 @@ async function dataPull() {
       await fetch(queryUserDefined)
         .then(async (res) => await res.json())
         .then(async (userDefinedData) => {
-          console.log(`userDefinedData is: ${userDefinedData}`);
           let eventData = userDefinedData;
+          console.log("--USER DEFINED DATA--");
           console.log(eventData);
           if (eventData.length > 0) {
             let checkBounds = new L.LatLngBounds(
               new L.LatLng(maxLat, maxLong),
               new L.LatLng(minLat, minLong));
             for (let index = 0; index < eventData.length; index++) {
-              console.log(`point ${index} is in bounds: ${checkBounds.contains(new L.LatLng(userDefinedData[index].geometry.coordinates[1], userDefinedData[index].geometry.coordinates[0]))}`);
+              //console.log(`point ${index} is in bounds: ${checkBounds.contains(new L.LatLng(userDefinedData[index].geometry.coordinates[1], userDefinedData[index].geometry.coordinates[0]))}`);
               let inBounds = checkBounds.contains(new L.LatLng(userDefinedData[index].geometry.coordinates[1], userDefinedData[index].geometry.coordinates[0]));
               if (inBounds){
                 if (userDefinedData[index].geometry.type !== "Polygon") {
@@ -487,10 +476,10 @@ async function getCityCoord(event) {
       if (response.ok) {
         await response.json().then(function (data) {
           if (data.message === "ok") {
-            console.log(data);
-            console.log(data.message);
-            console.log(data.lat);
-            console.log(data.lon);
+            //console.log(data);
+            //console.log(data.message);
+            //console.log(data.lat);
+            //console.log(data.lon);
             const lat = data.lat;
             const lon = data.lon;
             // L.marker([lat, lon])
@@ -791,24 +780,23 @@ document.querySelector('.new-event-form').addEventListener('submit', newFormHand
 //new-event-button function
 $("#new-event-btn").on("click", function () {
   $('#map').addClass('pin-drop-mode');
-console.log('did we make it');
 var theMarker = {};
 
-map.on('click',function(e){
-  lat = e.latlng.lat;
-  lon = e.latlng.lng;
+  map.on('click',function(e){
+    lat = e.latlng.lat;
+    lon = e.latlng.lng;
 
-  console.log("You clicked the map at LAT: "+ lat+" and LONG: "+lon );
-      //Clear existing marker, 
+    console.log("You clicked the map at LAT: "+ lat+" and LONG: "+lon );
+        //Clear existing marker, 
 
-      if (theMarker != undefined) {
-            map.removeLayer(theMarker);
-      };
-  //Add a marker to show where you clicked.
-   theMarker = L.marker([lat,lon]).addTo(map);
-   //opens the new event modal to finish filling out the details
-  $("#new-event-modal").removeClass("hidden");
-  $("header, #map, main.overlay").addClass("blur");
-   });
+    if (theMarker != undefined) {
+          map.removeLayer(theMarker);
+    };
+    //Add a marker to show where you clicked.
+     theMarker = L.marker([lat,lon]).addTo(map);
+     //opens the new event modal to finish filling out the details
+    $("#new-event-modal").removeClass("hidden");
+    $("header, #map, main.overlay").addClass("blur");
+  });
 
 });

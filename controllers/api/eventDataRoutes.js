@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const AWS = require('aws-sdk');
 const S3 = require("aws-sdk/clients/s3");
+const withAuth = require('../../utils/auth');
 require('dotenv').config();
 
 //current location /api/events/
@@ -12,12 +13,10 @@ router.post('/eonet', async (req, res) => {
     const eonetUrl = `https://eonet.sci.gsfc.nasa.gov/api/v3/events?bbox=${req.body.minLong},${req.body.maxLat},${req.body.maxLong},${req.body.minLat}&start=${req.body.dateStart}&end=${req.body.dateEnd}&category=${req.body.eventTypesArr}&limit=${req.body.eventCount}&status=all`;
     // console.log(`eonetUrl is: ${eonetUrl}`);
     // console.log(`req.body is: ${req.body}`);
-    // const eonetAPICall = await Post.create({
     const fetch = await import('node-fetch');
     const abc = await fetch.default(eonetUrl)
     .then(async resp => await resp.json())
     .then(async data => {
-      // console.log(data);
       res.status(200).json(data.events);
     });
 
@@ -45,7 +44,7 @@ router.post('/usgs', async (req, res) => {
 
 router.post('/userAdd', async (req, res) => {
   try {
-    console.log(req.body);
+    //console.log(req.body);
     const region = process.env.AWS_region;
     const id = process.env.AWS_ACCESS_KEY_ID;
     const secret = process.env.AWS_SECRET_ACCESS_KEY;
@@ -56,7 +55,6 @@ router.post('/userAdd', async (req, res) => {
       id,
     });
     const newData = JSON.stringify(req.body);
-    console.log(`newData is: ${newData}`);//delete
     let buf = ""; //Buffer.from(JSON.stringify(newData));
     let objectData = {};
 
@@ -75,7 +73,7 @@ router.post('/userAdd', async (req, res) => {
         objectData = objectDataAry;
         buf = Buffer.from(JSON.stringify(objectData));
       } else {
-        console.log(`downloaded successfully. ${data.Location}`);
+        console.log(`downloaded successfully.`);
         let objectData = JSON.parse(data.Body.toString());
         let objectDataAry = [];
         objectDataAry = JSON.parse(JSON.stringify(objectData));
@@ -101,7 +99,6 @@ router.post('/userAdd', async (req, res) => {
     .catch((err) => {
         throw err;
     });
-    console.log('success');//delete
     res.status(200).json({"message":"success"});
   } catch (err) {
     res.status(400).json(err);
@@ -133,7 +130,7 @@ router.get('/userPull', async (req, res) => {
         console.log(`no data in file`);
         res.status(200).json([{}]);
       } else {
-        console.log(`downloaded successfully. ${data.Location}`);
+        console.log(`downloaded successfully.`);
         let objectData = JSON.parse(data.Body.toString());
         // let objectDataAry = [];
         // objectDataAry = JSON.parse(JSON.stringify(objectData));
@@ -144,7 +141,5 @@ router.get('/userPull', async (req, res) => {
     res.status(400).json(err);
   }
 });
-
-// hello?
 
 module.exports = router;
