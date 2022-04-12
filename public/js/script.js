@@ -475,7 +475,6 @@ async function dataPull() {
 // Getting the city coordinates based on user entry in the city search bar
 async function getCityCoord(event) {
   event.preventDefault();
-
   // get city name
   // let newCity = searchText.value;
   //-----NEW CODE-----//
@@ -484,10 +483,6 @@ async function getCityCoord(event) {
   if (cityTextInput) {
     const response = await fetch(`/api/getaddress/${cityTextInput}`, {
       method: "GET",
-      //   body: JSON.stringify({ commentContent, postID }),
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
     }).then(async (response) => {
       if (response.ok) {
         await response.json().then(function (data) {
@@ -498,13 +493,14 @@ async function getCityCoord(event) {
             console.log(data.lon);
             const lat = data.lat;
             const lon = data.lon;
-            L.marker([lat, lon])
-              .addTo(layerGroup)
-              .bindPopup(`${cityTextInput}`); // add marker
+            // L.marker([lat, lon])
+            //   .addTo(layerGroup)
+            //   .bindPopup(`${cityTextInput}`); // add marker
             map.setView([lat, lon], 10); //set map to location, zoom to 10
             localStorage.setItem("Lat", lat);
             localStorage.setItem("Lon", lon);
             dataPull();
+            dataRefreshBtn.attr("disabled", true);
             return;
           } else {
             alert("Not a valid city");
@@ -516,43 +512,8 @@ async function getCityCoord(event) {
     });
   }
   //^^^^^END of NEW CODE^^^^^//
-  // if (newCity) {
-
-  //    // const myApiKey = "";
-
-  //    // const weatherUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${newCity}&limit=1&appid=${myApiKey}`;
-
-  //    fetch(weatherUrl)
-  //       .then(function (response) {
-  //          if (response.ok) {
-  //             response.json().then(function (data) {
-  //                console.log(data);
-  //                // checks if the city found
-  //                if (data.length > 0) {
-  //                   errorHandle.style.backgroundColor = "hsla(0, 0%, 20%, .7)";
-  //                   const checkCity = data[0].name;
-  //                   displayMessage(`Showing area for ${checkCity}`)
-  //                   // checks found city === entered city
-  //                   if (checkCity.toLowerCase() == newCity.toLowerCase()) {
-  //                      const lat = data[0].lat;
-  //                      const lon = data[0].lon;
-  //                      L.marker([data[0].lat, data[0].lon])
-  //                         .addTo(layerGroup)
-  //                         .bindPopup(`${checkCity} - ${newCity}`); // add marker
-  //                      map.setView([lat, lon], 10) //set map to location, zoom to 10
-  //                      localStorage.setItem("Lat", lat);
-  //                      localStorage.setItem("Lon", lon);
-  //                      dataPull();
-  //                   }
-  //                } else {
-  //                   displayMessage("That is not a city, dummy")
-  //                   errorHandle.style.backgroundColor = "red";
-  //                }
-  //             });
-  //          }
-  //       });
-  // }
-}
+ 
+};
 
 // Data Refresh Function
 function dataRefresh() {
