@@ -176,6 +176,7 @@ async function dataPull() {
     //--original code: let queryEONET = `https://eonet.sci.gsfc.nasa.gov/api/v3/events?bbox=${minLong},${maxLat},${maxLong},${minLat}&start=${dateStart}&end=${dateEnd}&category=${eventTypesArr}&limit=${eventCount}&status=all`;
     const queryEONET = `/api/events/eonet`;
     const queryUSGS = `/api/events/usgs`;
+    const queryUserDefined = `/api/events/userPull`;
     let eventsCount = 0;
     let objAry = {};
     // console.log(`objAry is: ${JSON.stringify(objAry)}`);
@@ -202,9 +203,7 @@ async function dataPull() {
     console.log(`queryEONET is: ${queryEONET}`);
     //--original code: fetch(queryEONET)
     // if ((eventTypesArr.length === 0) || (eventTypesArr.includes('earthquakes') && eventTypesArr.length !== 1)){
-    if (
-      !(eventTypesArr.includes("earthquakes") && eventTypesArr.length === 1)
-    ) {
+    if (!(eventTypesArr.includes("earthquakes") && eventTypesArr.length === 1)) {
       displayMessage(`PROCESSING EONET EVENT DATA...`);
       await fetch(queryEONET, {
         method: "POST",
@@ -389,8 +388,8 @@ async function dataPull() {
                       usgsData[index].properties.title
                     } -\n Date/Time: ${date.toUTCString()} -\n ${eventLink}`
                   );
-              }
-            }
+              };
+            };
             eventsCount += eventData.length;
             displayMessage(
               `${eventsCount} matching event(s) found between ${dateStart} and ${dateEnd}`
@@ -404,17 +403,74 @@ async function dataPull() {
           }
         });
       //-------------END USGS EARTHQUAKE-------------//
-      return;
+      // return;
     } else {
       displayMessage(
         `${eventsCount} matching event(s) found between ${dateStart} and ${dateEnd}`
       );
-      return;
-    }
-    return;
-  }
+      // return;
+    };
+    if (eventTypesArr.length === 0) { //TODO: ADD logic here with checkbox
+      //-------------START USER DEFINED DATA-------------//
+      displayMessage(`PROCESSING USER DEFINED DATA...`);
+      await fetch(queryUserDefined)
+        .then(async (res) => await res.json())
+        .then(async (userDefinedData) => {
+          console.log(`userDefinedData is: ${userDefinedData}`);
+          let eventData = userDefinedData;
+          console.log(eventData);
+          if (eventData.length > 0) {
+            let checkBounds = new L.LatLngBounds(
+              new L.LatLng(maxLat, maxLong),
+              new L.LatLng(minLat, minLong));
+            for (let index = 0; index < eventData.length; index++) {
+              console.log(`point ${index} is in bounds: ${checkBounds.contains(new L.LatLng(userDefinedData[index].geometry.coordinates[1], userDefinedData[index].geometry.coordinates[0]))}`);
+              let inBounds = checkBounds.contains(new L.LatLng(userDefinedData[index].geometry.coordinates[1], userDefinedData[index].geometry.coordinates[0]));
+              if (inBounds){
+                if (userDefinedData[index].geometry.type !== "Polygon") {
+                  let date = new Date(userDefinedData[index].geometry.date);
+                  var eventMarker = L.marker(
+                    [
+                      userDefinedData[index].geometry.coordinates[1],
+                      userDefinedData[index].geometry.coordinates[0],
+                    ],
+                    { icon: genericEventIcon }
+                  );
+                  let eventLink = `<a href="${userDefinedData[index].link}"target="_blank">More Info</a>`;
+                  eventMarker
+                    .addTo(layerGroup)
+                    //marker description with date
+                    .bindPopup(
+                      `USR - ${
+                        userDefinedData[index].title
+                      } -\n ${date.toUTCString()} -\n ${eventLink}`
+                    );
+                } 
+              };
+            };
+            eventsCount += eventData.length;
+            displayMessage(
+              `${eventsCount} matching event(s) found between ${dateStart} and ${dateEnd}`
+            );
+            return;
+          } else {
+            displayMessage(
+              `${eventsCount} matching event(s) found between ${dateStart} and ${dateEnd}`
+            );
+            return;
+          }
+        });
+      } else {
+        displayMessage(
+          `${eventsCount} matching event(s) found between ${dateStart} and ${dateEnd}`
+        );
+        // return;
+      }; 
+        //-------------END USER DEFINED DATA-------------//
+    // return;
+  };
   return;
-}
+};
 
 // Getting the city coordinates based on user entry in the city search bar
 async function getCityCoord(event) {
@@ -736,24 +792,20 @@ async function newFormHandler(event) {
   const eventDate = document.querySelector('#event-date').value;
   let eventLat = lat;
   let eventLon = lon;
-  let eventId = Math.floor(Math.random() * 1000);
+
 
 
   // Send fetch request to add a new event
-  const response = await fetch(`/api/events/userAdd`, {
+  const response = await fetch(`/api/newevent`, {
     method: 'POST',
-    body: `
-    {
-      "id":"${eventId}",
-     "title":"${eventName}",
-     "link":"https://google.com",
-     "geometry":
-       {"date":"${eventDate}",
-       "type":"Point",
-       "coordinates":[${eventLon},${eventLat}]
-      }
-    }
-    `,
+    body: JSON.stringify({
+      eventName,
+      description,
+      eventType,
+      eventDate,
+      eventLat,
+      eventLon
+    }),
     headers: {
       'Content-Type': 'application/json',
     },
