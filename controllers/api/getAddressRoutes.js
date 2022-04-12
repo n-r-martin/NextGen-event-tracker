@@ -1,13 +1,11 @@
 const router = require('express').Router();
 // const withAuth = require('../../utils/auth');
-// import fetch from 'node-fetch';
-// const fetch = require('node-fetch');
 
 //current location /api/getAddressRoutes
 
 router.get('/:textinput', async (req, res) => {
     try {
-        console.log(req.params.textinput);
+        //console.log(req.params.textinput);
         let newCity = req.params.textinput;
         let msgStatus = 'failed';
         let lat = '';
@@ -22,7 +20,7 @@ router.get('/:textinput', async (req, res) => {
                     // console.log(data);
                     if (data.length > 0) {
                         const checkCity = data[0].name;
-                        console.log(checkCity);
+                        //console.log(checkCity);
                         if (checkCity.toLowerCase() == newCity.toLowerCase()) { 
                             lat = data[0].lat;
                             lon = data[0].lon;
