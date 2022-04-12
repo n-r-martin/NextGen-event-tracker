@@ -792,20 +792,25 @@ async function newFormHandler(event) {
   const eventDate = document.querySelector('#event-date').value;
   let eventLat = lat;
   let eventLon = lon;
+  let eventId = Math.floor(Math.random() * 1000);
 
 
 
   // Send fetch request to add a new event
-  const response = await fetch(`/api/newevent`, {
+  const response = await fetch(`/api/events/userAdd`, {
     method: 'POST',
-    body: JSON.stringify({
-      eventName,
-      description,
-      eventType,
-      eventDate,
-      eventLat,
-      eventLon
-    }),
+    body: `
+    {
+      "id":"${eventId}",
+     "title":"${eventName}",
+     "link":"https://google.com",
+     "geometry":
+       {"date":"${eventDate}",
+       "type":"Point",
+       "coordinates":[${eventLon},${eventLat}]
+      }
+    }
+    `,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -820,13 +825,12 @@ async function newFormHandler(event) {
   }
 }
 
-// document.querySelector('.new-event-form').addEventListener('submit', newFormHandler);
+document.querySelector('.new-event-form').addEventListener('submit', newFormHandler);
   
-
 
 //new-event-button function
 $("#new-event-btn").on("click", function () {
-   $('#map').addClass('pin-drop-mode');
+  $('#map').addClass('pin-drop-mode');
 console.log('did we make it');
 var theMarker = {};
 
