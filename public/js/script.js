@@ -284,11 +284,14 @@ async function dataPull() {
                   ],
                   { icon: markerIcon }
                 );
+                let eventTitle = eonetData[index].title.replace(/\s+/g, '+');
+                let eventLink = `<a href="https://www.google.com/search?q=${eventTitle}+${date.getFullYear()}"target="_blank">More Info</a>`;
+                // console.log(eventLink);
                 eventMarker
                   .addTo(layerGroup)
                   //marker description with date
                   .bindPopup(
-                    `${eonetData[index].title} -\n ${date.toString()}`
+                    `${eonetData[index].title} -\n ${date.toString()} -\n ${eventLink}`
                   );
               } else {
                 for (
@@ -316,14 +319,14 @@ async function dataPull() {
             return;
           } else {
             displayMessage(
-              `No matching events found in this area between ${dateStart} and ${dateEnd}`
+              `${eventsCount} matching event(s) found between ${dateStart} and ${dateEnd}`
             );
             return;
           }
         });
-    }
+    };  //-------------END EONET-------------//
+    //-------------START USGS EARTHQUAKE-------------//
     if (eventTypesArr.includes("earthquakes") || eventTypesArr.length === 0) {
-      //-------------START USGS EARTHQUAKE-------------//
       displayMessage(`PROCESSING EARTHQUAKE DATA...`);
       await fetch(queryUSGS, {
         method: "POST",
@@ -373,13 +376,12 @@ async function dataPull() {
                   .addTo(layerGroup)
                   //marker description with date
                   .bindPopup(
-                    `Earthquake - ${
-                      usgsData[index].properties.title
-                    } -\n Date/Time: ${date.toUTCString()} -\n ${eventLink}`
+                    `Earthquake - ${usgsData[index].properties.title} -\n ${date.toUTCString()} -\n ${eventLink}`
                   );
+                eventsCount++;
               };
             };
-            eventsCount += eventData.length;
+            // eventsCount += eventData.length;
             displayMessage(
               `${eventsCount} matching event(s) found between ${dateStart} and ${dateEnd}`
             );
@@ -391,16 +393,13 @@ async function dataPull() {
             return;
           }
         });
-      //-------------END USGS EARTHQUAKE-------------//
-      // return;
     } else {
       displayMessage(
         `${eventsCount} matching event(s) found between ${dateStart} and ${dateEnd}`
       );
-      // return;
-    };
-    if (eventTypesArr.length === 0) { //TODO: ADD logic here with checkbox
-      //-------------START USER DEFINED DATA-------------//
+    };        //-------------END USGS EARTHQUAKE-------------//
+    //-------------START USER DEFINED DATA-------------//
+    if (eventTypesArr.includes("userDefined") || eventTypesArr.length === 0) { //TODO: ADD logic here with checkbox
       displayMessage(`PROCESSING USER DEFINED DATA...`);
       await fetch(queryUserDefined)
         .then(async (res) => await res.json())
@@ -430,14 +429,13 @@ async function dataPull() {
                     .addTo(layerGroup)
                     //marker description with date
                     .bindPopup(
-                      `USR - ${
-                        userDefinedData[index].title
-                      } -\n ${date.toUTCString()} -\n ${eventLink}`
+                      `USER - ${userDefinedData[index].title} -\n ${date.toUTCString()} -\n ${eventLink}`
                     );
-                } 
+                  eventsCount++;
+                }; 
               };
             };
-            eventsCount += eventData.length;
+            // eventsCount += eventData.length;
             displayMessage(
               `${eventsCount} matching event(s) found between ${dateStart} and ${dateEnd}`
             );
