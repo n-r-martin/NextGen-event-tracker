@@ -22,8 +22,6 @@ main {
   position: relative;
 }
 
-
-
 div#title-container {
   height: 3rem;
   width: 312px;
@@ -234,7 +232,7 @@ div.user-form-header {
 .pure-form-stacked input {
   margin-bottom: .75rem !important;
   width: 100% !important;
-  /* color: #111 !important; */
+  color: #111 !important;
 }
 
 .pure-form-message {
