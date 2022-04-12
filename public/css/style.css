@@ -150,6 +150,12 @@ button.btn-secondary {
   color: #fff;
 }
 
+button.btn-tertiary {
+  background-color: #333;
+  border: 1px solid #e8e8e8;
+  color: #e8e8e8;
+}
+
 .pure-button-hover,
 .pure-button:hover {
   background-image: none;
@@ -195,7 +201,7 @@ div#dynamic-form-container {
   position: absolute;
   top: 45px;
   width: 100%;
-  min-height: 330px;
+  min-height: 80px;
   background-color: #333;
   border: 1px solid #fff;
   /* padding: 1rem; */
@@ -215,7 +221,7 @@ div.user-form-header {
   position: relative;
   height: 40px;
   width: 100%;
-  overflow: scroll;
+  overflow: auto;
   padding: 0 1rem;
   color: #fff;
   border-bottom: 1px solid #fff;
@@ -229,9 +235,8 @@ div.user-form-header {
   transform: translateY(-50%);
 }
 
-.pure-form-stacked input {
+.pure-form-stacked input, .pure-form-stacked textarea {
   margin-bottom: .75rem !important;
-  width: 100% !important;
   color: #111 !important;
 }
 
@@ -252,16 +257,45 @@ div.user-form-header {
   width: 100%;
 }
 
-.login-button, .signup-button {
+.login-form input, .signup-form input {
+  width: 100% !important;
+}
+
+.new-event-form {
+  padding-top: 1.5rem;
+}
+
+.new-event-form input:nth-of-type(1) {
+  width: 387px !important;
+}
+
+.new-event-form label {
+  margin-top: 1rem;
+}
+
+.new-event-form label:nth-of-type(1) {
+  margin-top: 0;
+}
+
+.login-button, .signup-button, .new-event-submit-button {
   background-color: rgb(255, 75, 43);
   width: 100%;
   border: 1px solid #fff;
   margin: .5rem 0 2rem;
 }
 
+.new-event-submit-button {
+  width: 184px;
+  margin-bottom: 0;
+}
+
 /* logout button */
 .logout-button {
-  background-image: linear-gradient(to right, red, yellow);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
 }
 
 
@@ -406,7 +440,7 @@ div.modal-container {
   border: 1px solid #fff;
   border-radius: 5px;
   color: #e8e8e8;
-  overflow: scroll;
+  overflow: auto;
   cursor: default;
 }
 
@@ -414,9 +448,9 @@ div.modal-header {
   position: relative;
   height: 50px;
   width: 100%;
-  overflow: scroll;
+  overflow: auto;
   padding: 0 1rem;
-  background: linear-gradient(to right, rgb(232, 0, 50), rgb(255, 75, 43));
+  background: #333;
   color: #fff;
   border-bottom: 1px solid #fff;
   border-top-left-radius: 5px;
@@ -425,7 +459,7 @@ div.modal-header {
 
 .modal-header i.fa-times, .user-form-header i.fa-times {
   position: absolute;
-  right: 0.5rem;
+  right: 1rem;
   top: 55%;
   transform: translateY(-50%);
   font-size: 1.5em;

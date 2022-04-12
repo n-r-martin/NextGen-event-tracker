@@ -782,7 +782,6 @@ async function newFormHandler(event) {
 
   } else {
     alert('Failed to add event');
-
   }
 }
 
