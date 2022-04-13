@@ -30,6 +30,15 @@ As a developer, I want to access community submitted events via api and use in m
 4. Run npm run seed from terminal
 5. Run npm start from terminal
 
+## API Info
+| Path                  | Method | Action                     | Requires                             |
+|-----------------------|--------|----------------------------|--------------------------------------|
+| /api/getAddressRoutes | GET    | return 1 lat lon coord.    | :textinput                           |
+| /api/events/eonet     | POST   | return eonet api call data | JSON object                          |
+| /api/events/usgs      | POST   | return usgs api call data  | JSON object                          |
+| /api/events/userAdd   | POST   | adds event to application  | Not publicly accessible - "withAuth" |
+| /api/events/userPull  | GET    | return all category data   | none                                 |
+
 ## Contribution
 Thanks for your interest in contributing to the NextGen event tracker! We're constantly looking for ways to improve the project and any help is greatly appreciated. Check out our [Contribution Guidelines](https://github.com/n-r-martin/NextGen-event-tracker/wiki/Contribution-Guidelines "link to contribution guide") for ways to help out.
 
