@@ -42,7 +42,7 @@ router.post('/usgs', async (req, res) => {
   }
 });
 
-router.post('/userAdd', async (req, res) => {
+router.post('/userAdd', withAuth, async (req, res) => {
   try {
     //console.log(req.body);
     const region = process.env.AWS_region;
