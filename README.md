@@ -1,5 +1,7 @@
 <h1 align="center"> Next Gen Event Tracker <h1>
 
+![The main landing page is a single-page map application that allows a user to search for natural events](./public/img/nextGen-tracker-screengrab.png)
+
 ![badge](https://img.shields.io/badge/license-MIT-blue)
 
 ## Description
