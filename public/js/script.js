@@ -515,6 +515,7 @@ function dataRefresh() {
 function menuToggleHide() {
   var optionsMenu = $("#option-menu");
   var userUiContainer = $("#user-ui-container");
+  var newEventButton = $("#new-event-btn");
   var velocity = 200;
 
   if (optionsMenu.css("display") === "none") {
@@ -527,6 +528,10 @@ function menuToggleHide() {
       { right: "308px" },
       { duration: velocity, easing: "linear" }
     );
+    newEventButton.animate(
+       { right: "350px"},
+       { duration: velocity, easing: "linear" }
+    )
   } else {
     optionsMenu.toggle(
       "slide",
@@ -537,6 +542,10 @@ function menuToggleHide() {
       { right: "64px" },
       { duration: velocity, easing: "linear" }
     );
+    newEventButton.animate(
+      { right: "106px"},
+      { duration: velocity, easing: "linear" }
+   )
   }
 }
 
@@ -554,12 +563,11 @@ function toggleUserMenu() {
 
 // Function to open the modals
 function openModal(evt) {
-  $(".modal").removeClass("hidden");
-  $("header, #map, main.overlay").addClass("blur");
+  evt.preventDefault(); 
+  let dataTag = evt.target.getAttribute("data-modal");
+  let targetModalId = `${dataTag}-modal`;
 
-  let selectedModal = evt.target.getAttribute("data-modal");
-
-  $(".modal-header h2").text(selectedModal);
+  $('#' + targetModalId).removeClass('hidden');
 }
 
 // Function to close the currently opened modal
@@ -657,14 +665,8 @@ map.on("moveend", function () {
 });
 
 //Open Modals
-$("#help-btn").on("click", function () {
-  $("#help-modal").removeClass("hidden");
-  $("header, #map, main.overlay").addClass("blur");
-});
-
-$("#about-btn").on("click", function () {
-  $("#about-modal").removeClass("hidden");
-  $("header, #map, main.overlay").addClass("blur");
+$(".addl-btn").on("click", function (evt) {
+   openModal(evt);
 });
 
 // Toggle user menu on/off

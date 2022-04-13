@@ -41,49 +41,15 @@
   </main>
 
   <!-- Modals -->
-  <section class="modal hidden" id='help-modal'>
+  <section class="modal hidden" id='about-modal'>
     <div class="modal-background">
-      <div class="modal-container">
-        <div class="modal-header">
-          <i class="far fa-times modal-close-btn"></i>
-          <h2>Help</h2>
-        </div>
-        <div class="modal-body">
-          <h3>How to find a specific location?</h3>
-          {{!-- <img class='modal-img' src="assets/img/search-demo.gif" alt=""> --}}
-          <p>In the top left corner, you'll find a search bar that can be used to search for any city in the world.</p>
-
-          <h3>How to look for specific events in a timeframe?</h3>
-          {{!-- <img class='modal-img' src="assets/img/menu-demo.gif" alt=""> --}}
-          <p>In the upper right hand corner, you'll find a menu button that will allow you to adjust the events you
-            would like to see appear on the map, as well as the timeframe that those events occured in.</p>
-        </div>
-      </div>
+      {{> about-modal}}
     </div>
   </section>
 
-  <section class="modal hidden" id='about-modal'>
+  <section class="modal hidden" id='help-modal'>
     <div class="modal-background">
-      <div class="modal-container">
-        <div class="modal-header">
-          <i class="far fa-times modal-close-btn"></i>
-          <h2>About</h2>
-        </div>
-        <div class="modal-body">
-          <h3>What is the NextGen Event Tracker?</h3>
-          <p>Thanks for checking out our app! This app is designed to show natural events that have occurred
-            around the world with only a couple of clicks. Additionally, with the ability to create a user profile, you can also submit events, thereby contributing to citizen science!</p>
-
-          <p>This app was deisgned and developed by a small team of four who share a love for maps and data. We hope you
-            enjoy it!
-          </p>
-
-          <p>&#127759; &#128512; &#128591; </p>
-
-          <h3>Github Repo</h3>
-          <a href="https://github.com/n-r-martin/NextGen-event-tracker" target="_blank">&#128073; &nbsp; Here</a>
-        </div>
-      </div>
+      {{> help-modal}}
     </div>
   </section>
 
@@ -92,8 +58,6 @@
         {{> submit-new-event}}
       </div>
     </section>
-
-  {{!-- <div id="map"></div> --}}
 
   <script src="/js/script.js"></script>
   <script src="/js/login.js"></script>
