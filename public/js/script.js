@@ -207,8 +207,8 @@ async function dataPull() {
           var pointList = [];
           var polygonPoints = [];
           let eventData = eonetData;
-          console.log("--EONET DATA--");
-          console.log(eventData);
+          // console.log("--EONET DATA--");
+          // console.log(eventData);
           if (eventData.length > 0) {
             for (let index = 0; index < eventData.length; index++) {
               if (eonetData[index].geometry[0].type !== "Polygon") {
@@ -340,8 +340,8 @@ async function dataPull() {
         .then(async (usgsData) => {
           //console.log(`usgsData is: ${usgsData}`);
           let eventData = usgsData;
-          console.log("--USGS DATA--");
-          console.log(eventData);
+          // console.log("--USGS DATA--");
+          // console.log(eventData);
           if (eventData.length > 0) {
             for (let index = 0; index < eventData.length; index++) {
               if (usgsData[index].geometry.type !== "Polygon") {
@@ -405,8 +405,8 @@ async function dataPull() {
         .then(async (res) => await res.json())
         .then(async (userDefinedData) => {
           let eventData = userDefinedData;
-          console.log("--USER DEFINED DATA--");
-          console.log(eventData);
+          // console.log("--USER DEFINED DATA--");
+          // console.log(eventData);
           if (eventData.length > 0) {
             let checkBounds = new L.LatLngBounds(
               new L.LatLng(maxLat, maxLong),
@@ -786,7 +786,7 @@ var theMarker = {};
     lat = e.latlng.lat;
     lon = e.latlng.lng;
 
-    console.log("You clicked the map at LAT: "+ lat+" and LONG: "+lon );
+    // console.log("You clicked the map at LAT: "+ lat+" and LONG: "+lon );
         //Clear existing marker, 
 
     if (theMarker != undefined) {

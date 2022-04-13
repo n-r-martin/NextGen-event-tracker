@@ -1,19 +1,9 @@
-const ModelOne = require('./model-one');
-const ModelTwo = require('./model-two');
 const User = require('./User');
 const Location = require('./Location');
 const Event = require('./Event');
 const Geometry = require('./Geometry');
 const Coordinates = require('./Coordinates');
 const Category = require('./Category');
-
-ModelOne.hasMany(ModelTwo, {
-  foreignKey: 'one_id',
-});
-
-ModelTwo.belongsTo(ModelOne, {
-  foreignKey: 'one_id'
-});
 
 //key location searches to specific users, so they can be stored as 'favorites'
 User.hasMany(Location, {
@@ -49,4 +39,4 @@ Coordinates.belongsTo(Geometry, {
 });
 
 
-module.exports = { ModelOne, ModelTwo, User, Location, Event, Geometry, Coordinates, Category };
+module.exports = { User, Location, Event, Geometry, Coordinates, Category };
