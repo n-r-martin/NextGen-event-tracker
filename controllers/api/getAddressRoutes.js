@@ -1,5 +1,4 @@
 const router = require('express').Router();
-// const withAuth = require('../../utils/auth');
 
 //current location /api/getAddressRoutes
 
